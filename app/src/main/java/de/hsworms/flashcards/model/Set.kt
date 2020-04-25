@@ -1,8 +1,10 @@
 package de.hsworms.flashcards.model
 
-data class CardStack(
+data class Set(
     val id: Long,
-    val title: String,
+    val name: String,
+
+    // Experimental vals (!)
     val shortTimeCardCount: Int,
     val middleTimeCardCount: Int,
     val longTimeCardCount: Int

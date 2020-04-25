@@ -10,7 +10,7 @@ class HomeAdapter : ListDelegationAdapter<List<ListItem>>() {
 
     init {
         delegatesManager.apply {
-            addDelegate(CardStackItemAdapterDelegate())
+            addDelegate(CardSetItemAdapterDelegate())
         }
     }
 }

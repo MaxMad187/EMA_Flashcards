@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.hsworms.flashcards.R
-import de.hsworms.flashcards.model.CardStack
-import de.hsworms.flashcards.ui.CardStackItem
+import de.hsworms.flashcards.model.Set
+import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -52,25 +52,25 @@ class HomeFragment : Fragment() {
 
     private fun createSampleCardStackData() {
         val listItems = mutableListOf<ListItem>()
-        val cardStack1 = CardStack(
+        val cardSet1 = Set(
             id = 1,
-            title = "IT-Sicherheit",
+            name = "IT-Sicherheit",
             shortTimeCardCount = 12,
             middleTimeCardCount = 13,
             longTimeCardCount = 14
         )
-        val cardStackItem1 = CardStackItem(cardStack1)
-        listItems.add(cardStackItem1)
+        val cardSetItem1 = CardSetItem(cardSet1)
+        listItems.add(cardSetItem1)
 
-        val cardStack2 = CardStack(
+        val cardSet2 = Set(
             id = 2,
-            title = "EMA",
+            name = "EMA",
             shortTimeCardCount = 12,
             middleTimeCardCount = 13,
             longTimeCardCount = 14
         )
-        val cardStackItem2 = CardStackItem(cardStack2)
-        listItems.add(cardStackItem2)
+        val cardSetItem2 = CardSetItem(cardSet2)
+        listItems.add(cardSetItem2)
 
         // Show the items in the HomeAdapter
         homeAdapter?.items = listItems
