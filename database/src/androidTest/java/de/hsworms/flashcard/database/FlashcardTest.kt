@@ -5,7 +5,6 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.hsworms.flashcard.database.dao.FlashcardDao
-import de.hsworms.flashcard.database.entity.Flashcard
 import de.hsworms.flashcard.database.entity.FlashcardNormal
 import org.junit.After
 import org.junit.Assert
@@ -40,12 +39,21 @@ class FlashcardTest {
 
     @Test
     fun insertGetDeleteRoutine() {
-        flashcardDao.insert(FlashcardNormal("test", "asda"), FlashcardNormal("testasd", "abc"))
-        val fc1 = flashcardDao.getOne(1L)!!
-        val fc2 = flashcardDao.getOne(2L)!!
-        Assert.assertEquals(1L, fc1.id)
-        Assert.assertEquals(2L, fc2.id)
-        flashcardDao.delete(fc1, fc2)
+        flashcardDao.insert(FlashcardNormal("", ""), FlashcardNormal("", ""))
+
+        val fc1 = flashcardDao.getOne(1L)
+        val fc2 = flashcardDao.getOne(2L)
+
+        Assert.assertNotNull(fc1)
+        Assert.assertNotNull(fc2)
+
+        Assert.assertEquals(1L, fc1?.cardId)
+        Assert.assertEquals(2L, fc2?.cardId)
+
+        flashcardDao.delete(fc1!!, fc2!!)
+
+        Assert.assertNull(flashcardDao.getOne(1))
+        Assert.assertNull(flashcardDao.getOne(2))
     }
 
     @Test
@@ -54,5 +62,6 @@ class FlashcardTest {
         val fc = flashcardDao.getOne(1) as FlashcardNormal
         Assert.assertEquals("test", fc.front)
         Assert.assertEquals("abc", fc.back)
+        flashcardDao.delete(fc)
     }
 }

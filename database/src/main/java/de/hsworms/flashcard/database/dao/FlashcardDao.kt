@@ -11,15 +11,15 @@ import de.hsworms.flashcard.database.entity.FlashcardNormal
 interface FlashcardDao {
 
     /**
-     * Gets one [Flashcard] by its [id].
+     * Gets one [Flashcard] by its [cardId].
      *
-     * @param id The id of the [Flashcard].
+     * @param cardId The cardId of the [Flashcard].
      *
-     * @return The [Flashcard] with the [id] or null if not found.
+     * @return The [Flashcard] with the [cardId] or null if not found.
      */
-    fun getOne(id: Long): Flashcard? {
-        return when(getType(id)) {
-            0L -> getFlashcardNormal(id)
+    fun getOne(cardId: Long): Flashcard? {
+        return when(getType(cardId)) {
+            0L -> getFlashcardNormal(cardId)
             else -> null;
         }
     }
@@ -45,12 +45,12 @@ interface FlashcardDao {
     /**
      * Gets the [Flashcard.type] of a [Flashcard].
      *
-     * @param id The [Flashcard.id] of the [Flashcard].
+     * @param cardId The [Flashcard.cardId] of the [Flashcard].
      *
-     * @return The [Flashcard.type] of a [Flashcard] with the [id] or null if not found.
+     * @return The [Flashcard.type] of a [Flashcard] with the [cardId] or null if not found.
      */
-    @Query("SELECT type FROM flashcard WHERE id = :id")
-    fun getType(id: Long): Long?
+    @Query("SELECT type FROM flashcard WHERE cardId = :cardId")
+    fun getType(cardId: Long): Long?
 
     /**
      * Deletes one or more [Flashcard].
@@ -64,14 +64,14 @@ interface FlashcardDao {
     /* FLASHCARD_NORMAL */
 
     /**
-     * Gets one [FlashcardNormal] by its [Flashcard.id].
+     * Gets one [FlashcardNormal] by its [Flashcard.cardId].
      *
-     * @param id The [Flashcard.id] of the [FlashcardNormal].
+     * @param cardId The [Flashcard.cardId] of the [FlashcardNormal].
      *
-     * @return The [FlashcardNormal] with the [id] or null if not found.
+     * @return The [FlashcardNormal] with the [cardId] or null if not found.
      */
-    @Query(value = "SELECT * FROM flashcard_normal WHERE id = :id")
-    fun getFlashcardNormal(id: Long): FlashcardNormal?
+    @Query("SELECT * FROM flashcard_normal WHERE cardId = :cardId")
+    fun getFlashcardNormal(cardId: Long): FlashcardNormal?
 
     /**
      * Inserts one or more [FlashcardNormal].
