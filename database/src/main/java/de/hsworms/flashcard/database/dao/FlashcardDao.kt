@@ -11,6 +11,24 @@ import de.hsworms.flashcard.database.entity.FlashcardNormal
 interface FlashcardDao {
 
     /**
+     * TODO
+     */
+    fun getAll(): List<Flashcard> {
+        val flc = getAllAbstract()
+        val cards = mutableListOf<Flashcard>()
+
+        cards.addAll(getAllNormal(*(flc.filter { it.type == 0 }.map { it.cardId!! }.toLongArray())))
+
+        return cards
+    }
+
+    /**
+     * TODO
+     */
+    @Query("SELECT * FROM flashcard")
+    fun getAllAbstract(): List<Flashcard>
+
+    /**
      * Gets one [Flashcard] by its [cardId].
      *
      * @param cardId The cardId of the [Flashcard].
@@ -72,6 +90,12 @@ interface FlashcardDao {
      */
     @Query("SELECT * FROM flashcard_normal WHERE cardId = :cardId")
     fun getFlashcardNormal(cardId: Long): FlashcardNormal?
+
+    /**
+     * TODO
+     */
+    @Query("SELECT * FROM flashcard_normal WHERE cardID IN (:cardId)")
+    fun getAllNormal(vararg cardId: Long): List<FlashcardNormal>
 
     /**
      * Inserts one or more [FlashcardNormal].

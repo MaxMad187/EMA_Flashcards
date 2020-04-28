@@ -64,4 +64,15 @@ class FlashcardTest {
         Assert.assertEquals("abc", fc.back)
         flashcardDao.delete(fc)
     }
+
+    @Test
+    fun getAll() {
+        flashcardDao.insert(FlashcardNormal("", ""), FlashcardNormal("", ""), FlashcardNormal("", ""))
+        val flcs = flashcardDao.getAll()
+        Assert.assertEquals(3, flcs.size)
+
+        Assert.assertTrue(flcs[0] is FlashcardNormal)
+        Assert.assertTrue(flcs[1] is FlashcardNormal)
+        Assert.assertTrue(flcs[2] is FlashcardNormal)
+    }
 }

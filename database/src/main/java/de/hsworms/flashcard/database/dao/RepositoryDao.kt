@@ -12,6 +12,13 @@ interface RepositoryDao {
      * TODO
      */
     @Transaction
+    @Query("SELECT * from repository")
+    fun getAllRepositoriesWithCards(): List<RepositoryWithCards>
+
+    /**
+     * TODO
+     */
+    @Transaction
     @Query("SELECT * from repository WHERE repoId = :repoId")
     fun getRepositoryWithCards(repoId: Int): RepositoryWithCards?
 

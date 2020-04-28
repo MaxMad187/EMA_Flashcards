@@ -38,6 +38,13 @@ class RepositoryTest {
     }
 
     @Test
+    fun getAll() {
+        repositoryDao.insert(Repository(name = ""), Repository(name = ""), Repository(name = ""))
+        val repos = repositoryDao.getAllRepositoriesWithCards()
+        Assert.assertEquals(3, repos.size)
+    }
+
+    @Test
     fun insertGetDeleteRoutine() {
         repositoryDao.insert(Repository(name = ""), Repository(name = ""))
         val repo = repositoryDao.getRepository(1)
