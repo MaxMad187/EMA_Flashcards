@@ -11,19 +11,23 @@ import de.hsworms.flashcard.database.entity.FlashcardNormal
 interface FlashcardDao {
 
     /**
-     * TODO
+     * Gets all [Flashcard]s with their respective type.
+     *
+     * @return All [Flashcard]s.
      */
     fun getAll(): List<Flashcard> {
         val flc = getAllAbstract()
         val cards = mutableListOf<Flashcard>()
 
-        cards.addAll(getAllNormal(*(flc.filter { it.type == 0 }.map { it.cardId!! }.toLongArray())))
+        cards.addAll(getAllNormalByIds(*(flc.filter { it.type == 0 }.map { it.cardId!! }.toLongArray())))
 
         return cards
     }
 
     /**
-     * TODO
+     * Gets all [Flashcard]s without their respective type.
+     *
+     * @return All [Flashcard]s.
      */
     @Query("SELECT * FROM flashcard")
     fun getAllAbstract(): List<Flashcard>
@@ -38,7 +42,7 @@ interface FlashcardDao {
     fun getOne(cardId: Long): Flashcard? {
         return when(getType(cardId)) {
             0L -> getFlashcardNormal(cardId)
-            else -> null;
+            else -> null
         }
     }
 
@@ -92,10 +96,14 @@ interface FlashcardDao {
     fun getFlashcardNormal(cardId: Long): FlashcardNormal?
 
     /**
-     * TODO
+     * Gets all [FlashcardNormal]s by their respective [Flashcard.cardId]s.
+     *
+     * @param cardId One or more [Flashcard.cardId].
+     *
+     * @return The [FlashcardNormal]s who have the asked [Flashcard.cardId]s.
      */
     @Query("SELECT * FROM flashcard_normal WHERE cardID IN (:cardId)")
-    fun getAllNormal(vararg cardId: Long): List<FlashcardNormal>
+    fun getAllNormalByIds(vararg cardId: Long): List<FlashcardNormal>
 
     /**
      * Inserts one or more [FlashcardNormal].
