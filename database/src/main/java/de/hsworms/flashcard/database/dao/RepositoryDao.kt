@@ -70,4 +70,12 @@ interface RepositoryDao {
      */
     @Delete
     fun delete(vararg repo: Repository)
+
+    /**
+     * Updates one ore more [Repository].
+     *
+     * @param repo The [Repository]s to update.
+     */
+    @Update
+    fun update(vararg repo: Repository)
 }

@@ -112,4 +112,9 @@ interface FlashcardDao {
      */
     @Insert
     fun insertNormal(vararg flashcard: FlashcardNormal)
+
+
+    /**
+     * TODO update
+     */
 }

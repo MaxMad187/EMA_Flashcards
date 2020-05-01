@@ -71,4 +71,17 @@ class RepositoryTest {
 
         Assert.assertEquals(0, repositoryDao.getRepositoryWithCards(1)!!.cards.size)
     }
+
+    @Test
+    fun update() {
+        repositoryDao.insert(Repository(name = "Test"))
+
+        val repo = repositoryDao.getRepository(1)!!
+        Assert.assertEquals("Test", repo.name)
+
+        repositoryDao.update(Repository(repo.repoId, "Test2"))
+
+        val repo2 = repositoryDao.getRepository(1)!!
+        Assert.assertEquals("Test2", repo2.name)
+    }
 }
