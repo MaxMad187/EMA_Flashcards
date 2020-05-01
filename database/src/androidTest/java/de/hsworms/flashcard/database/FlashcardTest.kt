@@ -75,4 +75,17 @@ class FlashcardTest {
         Assert.assertTrue(flcs[1] is FlashcardNormal)
         Assert.assertTrue(flcs[2] is FlashcardNormal)
     }
+
+    @Test
+    fun update() {
+        flashcardDao.insert(FlashcardNormal("Front", "Back"))
+
+        val fc = flashcardDao.getOne(1)!! as FlashcardNormal
+        Assert.assertEquals("Front", fc.front)
+
+        flashcardDao.updateNormal(FlashcardNormal(fc.cardId, "Front2", "Back"))
+
+        val fc2 = flashcardDao.getOne(1)!! as FlashcardNormal
+        Assert.assertEquals("Front2", fc2.front)
+    }
 }

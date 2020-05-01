@@ -14,4 +14,8 @@ open class Flashcard (
 data class FlashcardNormal (
     val front: String,
     val back: String
-) : Flashcard(type = 0)
+) : Flashcard(type = 0) {
+    constructor(cardId: Long?, front: String, back: String) : this(front, back) {
+        super<Flashcard>.cardId = cardId
+    }
+}

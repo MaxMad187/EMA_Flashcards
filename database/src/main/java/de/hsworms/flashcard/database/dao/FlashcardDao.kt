@@ -1,9 +1,6 @@
 package de.hsworms.flashcard.database.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import de.hsworms.flashcard.database.entity.Flashcard
 import de.hsworms.flashcard.database.entity.FlashcardNormal
 
@@ -55,6 +52,24 @@ interface FlashcardDao {
         insertAbstract(*flashcard)
         insertNormal(*flashcard.filterIsInstance<FlashcardNormal>().toTypedArray())
     }
+
+    /**
+     * Updates one or more [Flashcard] according to their type.
+     *
+     * @param flashcard The [Flashcard]s to insert.
+     */
+    fun update(vararg flashcard: Flashcard) {
+        updateAbstract(*flashcard)
+        updateNormal(*flashcard.filterIsInstance<FlashcardNormal>().toTypedArray())
+    }
+
+    /**
+     * Updates one or more [Flashcard]
+     *
+     * @param flashcard The [Flashcard]s to insert.
+     */
+    @Update
+    fun updateAbstract(vararg flashcard: Flashcard)
 
     /**
      * Inserts one or more [Flashcard].
@@ -113,8 +128,11 @@ interface FlashcardDao {
     @Insert
     fun insertNormal(vararg flashcard: FlashcardNormal)
 
-
     /**
-     * TODO update
+     * Updates one or more [FlashcardNormal]
+     *
+     * @param flashcard The [FlashcardNormal]s to insert.
      */
+    @Update
+    fun updateNormal(vararg flashcard: FlashcardNormal)
 }
