@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainAttitudeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/mainAttitudeHeaderAvatarImageView"
+            android:layout_width="36dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:tint="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_avatar" />
+
+        <TextView
+            android:id="@+id/mainAttitudeProfileTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="Profilauswahl"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/mainAttitudeHeaderAvatarImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/mainAttitudeOpenButton"
+        android:layout_width="245dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="24dp"
+        android:text="öffnen"
+        app:backgroundTint="#363742"
+        app:layout_constraintBottom_toTopOf="@+id/mainAttitudeRenameButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainAttitudeHeader"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/mainAttitudeRenameButton"
+        android:layout_width="245dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="24dp"
+        android:text="umbenennen"
+        app:backgroundTint="#363742"
+        app:layout_constraintBottom_toTopOf="@+id/mainAttitudeDeleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainAttitudeOpenButton" />
+
+    <Button
+        android:id="@+id/mainAttitudeDeleteButton"
+        android:layout_width="245dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="24dp"
+        android:text="löschen"
+        app:backgroundTint="#363742"
+        app:layout_constraintBottom_toTopOf="@+id/mainAttitudeCloseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainAttitudeRenameButton" />
+
+    <Button
+        android:id="@+id/mainAttitudeCloseButton"
+        android:layout_width="245dp"
+        android:layout_height="58dp"
+        android:text="schließen"
+        app:backgroundTint="#363742"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainAttitudeDeleteButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
