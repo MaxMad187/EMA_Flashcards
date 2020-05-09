@@ -55,6 +55,8 @@
         android:ellipsize="end"
         android:lines="1"
         android:text="Modul"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView"
         app:layout_constraintStart_toEndOf="@id/headerAvatarImageView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +71,8 @@
         android:ellipsize="end"
         android:lines="1"
         android:text="This is the subline"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView"
         app:layout_constraintStart_toEndOf="@id/headerAvatarImageView"
