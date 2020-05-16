@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/flashcardHeaderLayout"
-        layout="@layout/header_layout"
+        layout="@layout/header_layout_flashcard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

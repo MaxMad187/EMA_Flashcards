@@ -13,6 +13,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/listItemCardSetShortTimeCardCountTextView"
         app:layout_constraintHorizontal_bias="0"
@@ -26,6 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:textColor="#D42F2E"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/listItemCardSetMiddleTimeCardCountTextView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="14" />
@@ -36,6 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:textColor="#27BB1C"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/listItemCardSetLongTimeCardCountTextView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="15" />
@@ -46,6 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:textColor="#20456B"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="16" />
