@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="edit_note_main_edit_text_horizontal_margin">148dp</dimen>
+</resources>
