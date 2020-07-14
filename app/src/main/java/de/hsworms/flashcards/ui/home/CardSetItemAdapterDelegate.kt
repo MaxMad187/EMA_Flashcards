@@ -51,9 +51,11 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
          */
         fun bind(item: CardSetItem) {
             titleTextView.text = item.set.name
+            /*
+            TODO
             shortTimeCardCountTextView.text = item.set.shortTimeCardCount.toString()
             middleTimeCardCountTextView.text = item.set.middleTimeCardCount.toString()
-            longTimeCardCountTextView.text = item.set.longTimeCardCount.toString()
+            longTimeCardCountTextView.text = item.set.longTimeCardCount.toString()*/
         }
     }
 }
