@@ -1,10 +1,13 @@
 package de.hsworms.flashcards.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
+import de.hsworms.flashcards.MainActivity
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
@@ -41,21 +44,29 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
      */
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private lateinit var item: CardSetItem
         private val titleTextView = itemView.listItemCardSetTitleTextView
         private val shortTimeCardCountTextView = itemView.listItemCardSetShortTimeCardCountTextView
         private val middleTimeCardCountTextView = itemView.listItemCardSetMiddleTimeCardCountTextView
         private val longTimeCardCountTextView = itemView.listItemCardSetLongTimeCardCountTextView
 
+        private val click: View.OnClickListener = View.OnClickListener {
+            Log.i("Flashcard",item.set.name + " was clicked")
+        }
+
         /**
          * Bind the [CardSetItem] to the view
          */
         fun bind(item: CardSetItem) {
+            this.item = item
             titleTextView.text = item.set.name
             /*
             TODO
             shortTimeCardCountTextView.text = item.set.shortTimeCardCount.toString()
             middleTimeCardCountTextView.text = item.set.middleTimeCardCount.toString()
             longTimeCardCountTextView.text = item.set.longTimeCardCount.toString()*/
+
+            titleTextView.setOnClickListener(click)
         }
     }
 }

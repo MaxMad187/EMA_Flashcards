@@ -58,7 +58,6 @@ class HomeFragment : Fragment() {
 
         // Show example items
         fetchData()
-
     }
 
     private fun setUpHomeRecyclerView() {
