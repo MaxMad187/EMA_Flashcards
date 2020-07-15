@@ -12,13 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.Repository
-import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
-import de.hsworms.flashcard.database.entity.RepositoryWithCards
 import de.hsworms.flashcards.R
-import de.hsworms.flashcards.model.Set
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
-import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.alert_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.GlobalScope
@@ -116,7 +112,7 @@ class HomeFragment : Fragment() {
     private fun fetchData() {
         repositories.clear()
 
-        /*val ctx = this.requireContext()
+        val ctx = this.requireContext()
         GlobalScope.launch {
             FCDatabase.getDatabase(ctx).repositoryDao().getAllRepositoriesWithCards().forEach {
                 repositories.add(CardSetItem(it))
@@ -124,10 +120,10 @@ class HomeFragment : Fragment() {
 
             // Show the items in the HomeAdapter
             homeAdapter?.items = repositories
-        }*/
+        }
 
         // Test Repo
-        val rwc = RepositoryWithCards(
+        /*val rwc = RepositoryWithCards(
             repository = Repository(name = "__TEST__"),
             crossRef = listOf(
                 RepositoryCardCrossRef(1, 1, 0, 0),
@@ -136,9 +132,7 @@ class HomeFragment : Fragment() {
                 RepositoryCardCrossRef(1, 4, System.currentTimeMillis() - 1000, -1)
             )
         )
-
         repositories.add(CardSetItem(rwc))
-
-        homeAdapter?.items = repositories
+        homeAdapter?.items = repositories*/
     }
 }
