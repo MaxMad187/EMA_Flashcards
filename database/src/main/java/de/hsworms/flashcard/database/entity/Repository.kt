@@ -16,10 +16,13 @@ data class Repository (
         indices = [Index(name = "repo_index", value = ["repoId"]), Index(name = "card_index", value = ["cardId"])])
 data class RepositoryCardCrossRef(
     val repoId: Int,
-    val cardId: Long
+    val cardId: Long,
+    val nextDate: Long = 0,
+    val interval: Int = 0
 )
 
 data class RepositoryWithCards (
     @Embedded val repository: Repository,
-    @Relation(parentColumn = "repoId", entityColumn = "cardId", associateBy = Junction(RepositoryCardCrossRef::class)) val cards: List<Flashcard> = emptyList()
+    @Relation(parentColumn = "repoId", entityColumn = "cardId", associateBy = Junction(RepositoryCardCrossRef::class)) val cards: List<Flashcard> = emptyList(),
+    @Relation(entity = RepositoryCardCrossRef::class, entityColumn = "repoId", parentColumn = "repoId") val crossRef: List<RepositoryCardCrossRef>
 )

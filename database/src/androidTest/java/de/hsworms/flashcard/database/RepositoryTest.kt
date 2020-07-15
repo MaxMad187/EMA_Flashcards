@@ -6,10 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.hsworms.flashcard.database.dao.FlashcardDao
 import de.hsworms.flashcard.database.dao.RepositoryDao
-import de.hsworms.flashcard.database.entity.FlashcardNormal
-import de.hsworms.flashcard.database.entity.Repository
-import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
-import de.hsworms.flashcard.database.entity.RepositoryWithCards
+import de.hsworms.flashcard.database.entity.*
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -83,5 +80,19 @@ class RepositoryTest {
 
         val repo2 = repositoryDao.getRepository(1)!!
         Assert.assertEquals("Test2", repo2.name)
+    }
+
+    @Test
+    fun crossRefTest() {
+        repositoryDao.insert(Repository(name = "Test"))
+        flashcardDao.insert(FlashcardNormal(front="test", back="test"))
+
+        repositoryDao.addCard(RepositoryCardCrossRef(1, 1, 5, 1000))
+
+        val rwc = repositoryDao.getRepositoryWithCards(1)!!
+
+        val cross = rwc.crossRef[0]
+        Assert.assertEquals(5, cross.nextDate)
+        Assert.assertEquals(1000, cross.interval)
     }
 }
