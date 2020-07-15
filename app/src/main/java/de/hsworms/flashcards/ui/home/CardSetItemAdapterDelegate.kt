@@ -51,7 +51,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         private val longTimeCardCountTextView = itemView.listItemCardSetLongTimeCardCountTextView
 
         private val click: View.OnClickListener = View.OnClickListener {
-            Log.i("Flashcard",item.set.name + " was clicked")
+            Log.i("Flashcard",item.set.repository.name + " was clicked")
         }
 
         /**
@@ -59,14 +59,23 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
          */
         fun bind(item: CardSetItem) {
             this.item = item
-            titleTextView.text = item.set.name
-            /*
-            TODO
-            shortTimeCardCountTextView.text = item.set.shortTimeCardCount.toString()
-            middleTimeCardCountTextView.text = item.set.middleTimeCardCount.toString()
-            longTimeCardCountTextView.text = item.set.longTimeCardCount.toString()*/
+            titleTextView.text = item.set.repository.name
+
+            val time = System.currentTimeMillis()
+            val list = item.set.crossRef.filter { it.nextDate <= time }
+
+            val sh = list.filter { it.nextDate != 0L && it.interval <= 0 }.count()
+            val mi = list.filter { it.nextDate != 0L && it.interval > 0}.count()
+            val lo = list.filter { it.nextDate == 0L }.count()
+
+            shortTimeCardCountTextView.text = sh.toString()
+            middleTimeCardCountTextView.text = mi.toString()
+            longTimeCardCountTextView.text = lo.toString()
 
             titleTextView.setOnClickListener(click)
+            shortTimeCardCountTextView.setOnClickListener(click)
+            middleTimeCardCountTextView.setOnClickListener(click)
+            longTimeCardCountTextView.setOnClickListener(click)
         }
     }
 }

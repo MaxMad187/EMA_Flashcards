@@ -61,7 +61,7 @@ interface RepositoryDao {
      * @param repo The [Repository]s to add.
      */
     @Insert
-    fun insert(vararg repo: Repository)
+    fun insert(vararg repo: Repository): Array<Long>
 
     /**
      * Deletes one or more [Repository].

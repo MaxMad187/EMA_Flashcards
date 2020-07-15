@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.Repository
+import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
+import de.hsworms.flashcard.database.entity.RepositoryWithCards
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.model.Set
 import de.hsworms.flashcards.ui.CardSetItem
@@ -99,8 +101,9 @@ class HomeFragment : Fragment() {
 
         GlobalScope.launch {
             val repo = Repository(null, name)
-            FCDatabase.getDatabase(ctx).repositoryDao().insert(repo)
-            repositories.add(CardSetItem(repo))
+            val id = FCDatabase.getDatabase(ctx).repositoryDao().insert(repo)
+            val cr = FCDatabase.getDatabase(ctx).repositoryDao().getRepositoryWithCards(id[0].toInt())!!
+            repositories.add(CardSetItem(cr))
 
             // Update the adapt
             homeAdapter?.items = repositories
@@ -113,14 +116,29 @@ class HomeFragment : Fragment() {
     private fun fetchData() {
         repositories.clear()
 
-        val ctx = this.requireContext()
+        /*val ctx = this.requireContext()
         GlobalScope.launch {
             FCDatabase.getDatabase(ctx).repositoryDao().getAllRepositoriesWithCards().forEach {
-                repositories.add(CardSetItem(it.repository))
+                repositories.add(CardSetItem(it))
             }
 
             // Show the items in the HomeAdapter
             homeAdapter?.items = repositories
-        }
+        }*/
+
+        // Test Repo
+        val rwc = RepositoryWithCards(
+            repository = Repository(name = "__TEST__"),
+            crossRef = listOf(
+                RepositoryCardCrossRef(1, 1, 0, 0),
+                RepositoryCardCrossRef(1, 2, System.currentTimeMillis() - 1000, 1),
+                RepositoryCardCrossRef(1, 3, System.currentTimeMillis() + 1000000, 1),
+                RepositoryCardCrossRef(1, 4, System.currentTimeMillis() - 1000, -1)
+            )
+        )
+
+        repositories.add(CardSetItem(rwc))
+
+        homeAdapter?.items = repositories
     }
 }
