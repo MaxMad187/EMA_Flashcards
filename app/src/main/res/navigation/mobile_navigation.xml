@@ -19,16 +19,26 @@
             android:id="@+id/action_HomeFragment_to_CardListFragment"
             app:destination="@id/nav_cardlist" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_edit"
+        android:name="de.hsworms.flashcards.ui.edit.EditFragment"
+        android:label="@string/menu_edit"
+        tools:layout="@layout/fragment_edit">
+        <action
+            android:id="@+id/action_nav_edit_to_nav_cardlist"
+            app:destination="@id/nav_cardlist" />
+
+        <argument
+            android:name="toEdit"
+            app:argType="de.hsworms.flashcard.database.entity.RepositoryCardCrossRef"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="de.hsworms.flashcards.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery">
-
-        <action
-            android:id="@+id/action_GalleryFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
     </fragment>
 
     <fragment
@@ -38,8 +48,8 @@
         tools:layout="@layout/fragment_cardlist">
 
         <action
-            android:id="@+id/action_CardListFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_CardListFragment_to_EditFragment"
+            app:destination="@id/nav_edit" />
     </fragment>
 
     <fragment

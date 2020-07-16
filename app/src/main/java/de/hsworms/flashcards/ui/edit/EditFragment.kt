@@ -1,33 +1,36 @@
-package de.hsworms.flashcards.ui.cardlist
+package de.hsworms.flashcards.ui.edit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import de.hsworms.flashcards.R
-import de.hsworms.flashcards.ui.edit.EditFragment
 import de.hsworms.flashcards.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class CardListFragment : Fragment() {
+class EditFragment : Fragment() {
 
-    private lateinit var cardListViewModel: CardListViewModel
+    private lateinit var editViewModel: EditViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        val cross = arguments?.get("toEdit") as RepositoryCardCrossRef
+        Log.i("test", cross.toString())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        cardListViewModel = ViewModelProviders.of(this).get(CardListViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_cardlist, container, false)
+        editViewModel = ViewModelProviders.of(this).get(EditViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_edit, container, false)
     }
 
     override fun onResume() {
@@ -37,13 +40,10 @@ class CardListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cardListViewModel.text.observe(viewLifecycleOwner, Observer {
+        editViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        bottomAppBarFab.setOnClickListener {
-            val cross = RepositoryCardCrossRef(1, 1, 0, 0)
-            val bundle = bundleOf("toEdit" to cross)
-            findNavController().navigate(R.id.nav_edit, bundle)
-        }
+        // Show the create set dialog on FAB click
+        //bottomAppBarFab.setOnClickListener { showCreateSetDialog() }
     }
 }

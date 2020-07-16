@@ -15,4 +15,11 @@
     <string name="about">About</string>
     <string name="settings">Settings</string>
     <string name="menu_cardlist">Kartenansicht</string>
+    <string name="searchEditTextHint">Suchen...</string>
+    <string name="repositorySpinnerLabelText">Stapel:</string>
+    <string name="repositoryEditFrontLabelText">Front</string>
+    <string name="repositoryEditFrontLabelHint">Frage</string>
+    <string name="repositoryEditBackLabelText">Back</string>
+    <string name="repositoryEditBackLabelHint">Antwort</string>
+    <string name="menu_edit">Edit</string>
 </resources>

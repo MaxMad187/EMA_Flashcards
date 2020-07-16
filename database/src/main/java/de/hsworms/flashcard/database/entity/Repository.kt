@@ -1,6 +1,7 @@
 package de.hsworms.flashcard.database.entity
 
 import androidx.room.*
+import java.io.Serializable
 
 @Entity
 data class Repository (
@@ -17,9 +18,9 @@ data class Repository (
 data class RepositoryCardCrossRef(
     val repoId: Int,
     val cardId: Long,
-    val nextDate: Long = 0,
-    val interval: Int = 0
-)
+    val nextDate: Long,
+    val interval: Int
+) : Serializable
 
 data class RepositoryWithCards (
     @Embedded val repository: Repository,

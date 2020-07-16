@@ -54,7 +54,7 @@ class RepositoryTest {
     fun addGetRemoveCards() {
         repositoryDao.insert(Repository(name = ""))
         flashcardDao.insert(FlashcardNormal("test", "abc"))
-        repositoryDao.addCard(RepositoryCardCrossRef(1,1))
+        repositoryDao.addCard(RepositoryCardCrossRef(1,1, 0, 0))
 
         val repo = repositoryDao.getRepositoryWithCards(1)!!
         Assert.assertEquals(1, repo.cards.size)
@@ -64,7 +64,7 @@ class RepositoryTest {
         Assert.assertEquals("test", card.front)
         Assert.assertEquals("abc", card.back)
 
-        repositoryDao.removeCard(RepositoryCardCrossRef(1, 1L))
+        repositoryDao.removeCard(RepositoryCardCrossRef(1, 1L, 0, 0))
 
         Assert.assertEquals(0, repositoryDao.getRepositoryWithCards(1)!!.cards.size)
     }
