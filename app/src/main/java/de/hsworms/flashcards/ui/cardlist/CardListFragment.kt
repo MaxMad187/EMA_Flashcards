@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import de.hsworms.flashcards.R
-import de.hsworms.flashcards.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class CardListFragment : Fragment() {

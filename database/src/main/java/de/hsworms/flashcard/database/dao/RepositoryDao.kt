@@ -23,7 +23,7 @@ interface RepositoryDao {
      *
      * @param repoId The [Repository.repoId] of the [Repository].
      *
-     * @return The [Repository] with the [repoId] or null if not found.
+     * @return The [RepositoryWithCards] with the [repoId] or null if not found.
      */
     @Transaction
     @Query("SELECT * from repository WHERE repoId = :repoId")
@@ -59,6 +59,8 @@ interface RepositoryDao {
      * Creates one or more [Repository].
      *
      * @param repo The [Repository]s to add.
+     *
+     * @return An array of the inserted repoIds.
      */
     @Insert
     fun insert(vararg repo: Repository): Array<Long>
@@ -78,4 +80,12 @@ interface RepositoryDao {
      */
     @Update
     fun update(vararg repo: Repository)
+
+    /**
+     * Updates the cross reference for a [RepositoryWithCards].
+     *
+     * @param rwc The [RepositoryCardCrossRef] to update.
+     */
+    @Update
+    fun update(vararg rwc: RepositoryCardCrossRef)
 }

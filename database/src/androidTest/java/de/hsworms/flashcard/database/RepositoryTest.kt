@@ -95,4 +95,21 @@ class RepositoryTest {
         Assert.assertEquals(5, cross.nextDate)
         Assert.assertEquals(1000, cross.interval)
     }
+
+    @Test
+    fun updateCrossRef() {
+        repositoryDao.insert(Repository(name = "Test"))
+        flashcardDao.insert(FlashcardNormal(front="test", back="test"))
+
+        repositoryDao.addCard(RepositoryCardCrossRef(1, 1, 5, 1000))
+
+        val rccr = RepositoryCardCrossRef(1, 1, 7, 10)
+        repositoryDao.update(rccr)
+
+        val rwc = repositoryDao.getRepositoryWithCards(1)!!
+
+        val cross = rwc.crossRef[0]
+        Assert.assertEquals(7, cross.nextDate)
+        Assert.assertEquals(10, cross.interval)
+    }
 }
