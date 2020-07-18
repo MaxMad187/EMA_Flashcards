@@ -43,7 +43,7 @@ class CardListFragment : Fragment() {
         bottomAppBarFab.setOnClickListener {
             val cross = RepositoryCardCrossRef(1, 1, 0, 0)
             val bundle = bundleOf("toEdit" to cross)
-            findNavController().navigate(R.id.nav_edit, bundle)
+            findNavController().navigate(R.id.nav_edit)
         }
     }
 }
