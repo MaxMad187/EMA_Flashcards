@@ -1,13 +1,18 @@
 package de.hsworms.flashcards.ui.cardlist
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.findFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import de.hsworms.flashcard.database.entity.FlashcardNormal
+import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import de.hsworms.flashcards.MainActivity
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardItem
@@ -51,6 +56,11 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
         private val titleTextView = itemView.listItemCardTitle
         private val repoTextView = itemView.listItemCardRepo
 
+        private val click: View.OnClickListener = View.OnClickListener {
+            val bundle = bundleOf("toEdit" to item.cross)
+            itemView.findFragment<CardListFragment>().findNavController().navigate(R.id.nav_edit, bundle)
+        }
+
         /**
          * Bind the [CardItem] to the view
          */
@@ -59,6 +69,9 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             titleTextView.text = (item.card as FlashcardNormal).front
             titleTextView.setSingleLine()
             repoTextView.text = item.repo.name
+
+            titleTextView.setOnClickListener(click)
+            repoTextView.setOnClickListener(click)
         }
     }
 }

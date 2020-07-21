@@ -19,4 +19,4 @@ data class CardSetItem(val set: RepositoryWithCards) : ListItem()
 /**
  * Represents a card in a list, holding a [Flashcard] object
  */
-data class CardItem(val repo: Repository, val card: Flashcard) : ListItem()
+data class CardItem(val repo: Repository, val card: Flashcard, val cross: RepositoryCardCrossRef) : ListItem()

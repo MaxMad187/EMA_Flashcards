@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class EditFragment : Fragment() {
 
     private lateinit var editViewModel: EditViewModel
-    private var cardID: Long? = null
+    private var cross: RepositoryCardCrossRef? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +48,17 @@ class EditFragment : Fragment() {
             val repos = FCDatabase.getDatabase(requireContext()).repositoryDao().getAllRepositoriesWithCards().toTypedArray()
             repositorySpinner.adapter = RepositoryAdapter(requireContext(), android.R.layout.simple_spinner_item, repos)
 
-
             if (arguments?.containsKey("toEdit")!!) {
-                val cross = arguments?.get("toEdit") as RepositoryCardCrossRef
-                val index = repos.indexOfFirst { it.repository.repoId == cross.repoId }
+                cross = arguments?.get("toEdit") as RepositoryCardCrossRef
+                val index = repos.indexOfFirst { it.repository.repoId == cross?.repoId }
                 repositorySpinner.setSelection(index)
-                cardID = cross.cardId
+
+                val fn = FCDatabase.getDatabase(requireContext()).flashcardDao().getFlashcardNormal(cross?.cardId!!)
+
+                requireActivity().runOnUiThread {
+                    cardEditFront.setText(fn?.front)
+                    cardEditBack.setText(fn?.back)
+                }
             }
         }
 
@@ -75,17 +80,20 @@ class EditFragment : Fragment() {
         }
 
         GlobalScope.launch {
-            val fn = FlashcardNormal(cardID, front, back)
-            var id = cardID
-            if(cardID == null) {
+            val fn = FlashcardNormal(cross?.cardId, front, back)
+            var id = cross?.cardId
+            if(cross == null) {
                 id = FCDatabase.getDatabase(requireContext()).flashcardDao().insert(fn)[0]
+                val cross = RepositoryCardCrossRef((repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!, id!!, 0, 0)
+                FCDatabase.getDatabase(requireContext()).repositoryDao().addCard(cross)
             } else {
                 FCDatabase.getDatabase(requireContext()).flashcardDao().update(fn)
+                val cross = RepositoryCardCrossRef((repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!, id!!, cross?.nextDate!!, cross?.interval!!)
+                FCDatabase.getDatabase(requireContext()).repositoryDao().update(cross)
             }
-            val cross = RepositoryCardCrossRef((repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!, id!!, 0, 0)
-            FCDatabase.getDatabase(requireContext()).repositoryDao().addCard(cross)
 
-            cardID = null
+
+            cross = null
 
             requireActivity().runOnUiThread {
                 cardEditFront.setText("")

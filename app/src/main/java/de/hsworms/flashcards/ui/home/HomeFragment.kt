@@ -101,8 +101,11 @@ class HomeFragment : Fragment() {
             val cr = FCDatabase.getDatabase(ctx).repositoryDao().getRepositoryWithCards(id[0].toInt())!!
             repositories.add(CardSetItem(cr))
 
-            // Update the adapt
+            // Update the adapter
             homeAdapter?.items = repositories
+            requireActivity().runOnUiThread {
+                homeAdapter?.notifyDataSetChanged()
+            }
         }
     }
 

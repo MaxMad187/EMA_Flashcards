@@ -1,6 +1,7 @@
 package de.hsworms.flashcards.ui.cardlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,12 +85,16 @@ class CardListFragment : Fragment() {
         GlobalScope.launch {
             FCDatabase.getDatabase(ctx).repositoryDao().getAllRepositoriesWithCards().forEach {
                 it.cards.forEach { card ->
-                    cards.add(CardItem(it.repository, FCDatabase.getDatabase(ctx).flashcardDao().getOne(card.cardId!!)!!))
+                    cards.add(CardItem(it.repository, FCDatabase.getDatabase(ctx).flashcardDao().getOne(card.cardId!!)!!, it.crossRef.filter { cross -> cross.cardId == card.cardId }[0]))
                 }
             }
 
             // Show the items in the CardListAdapter
+            Log.i("test", cards.size.toString())
             cardListAdapter?.items = cards
+            requireActivity().runOnUiThread {
+                cardListAdapter?.notifyDataSetChanged()
+            }
         }
     }
 }
