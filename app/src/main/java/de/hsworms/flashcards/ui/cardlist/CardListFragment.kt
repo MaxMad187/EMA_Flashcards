@@ -40,9 +40,9 @@ class CardListFragment : Fragment() {
         cardListViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
+
+
         bottomAppBarFab.setOnClickListener {
-            val cross = RepositoryCardCrossRef(1, 1, 0, 0)
-            val bundle = bundleOf("toEdit" to cross)
             findNavController().navigate(R.id.nav_edit)
         }
     }

@@ -43,7 +43,7 @@
             android:layout_marginRight="25dp" />
 
         <TextView
-            android:id="@+id/repositoryEditFrontLabel"
+            android:id="@+id/cardEditFrontLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/repositoryEditFrontLabelText"
@@ -54,34 +54,34 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/repositoryEditFront"
+            android:id="@+id/cardEditFront"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repositoryEditFrontLabel"
+            app:layout_constraintTop_toBottomOf="@+id/cardEditFrontLabel"
             android:hint="@string/repositoryEditFrontLabelHint"
             android:paddingLeft="60dp"
             android:paddingRight="60dp" />
 
         <TextView
-            android:id="@+id/repositoryEditBackLabel"
+            android:id="@+id/cardEditBackLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/repositoryEditBackLabelText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repositoryEditFront"
+            app:layout_constraintTop_toBottomOf="@+id/cardEditFront"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="25dp"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/repositoryEditBack"
+            android:id="@+id/cardEditBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repositoryEditBackLabel"
+            app:layout_constraintTop_toBottomOf="@+id/cardEditBackLabel"
             android:hint="@string/repositoryEditBackLabelHint"
             android:paddingLeft="60dp"
             android:paddingRight="60dp" />

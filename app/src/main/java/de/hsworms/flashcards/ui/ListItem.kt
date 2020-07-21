@@ -13,4 +13,3 @@ sealed class ListItem
  * Represents a card stack in a list, holding a [Set] object
  */
 data class CardSetItem(val set: RepositoryWithCards) : ListItem()
-
