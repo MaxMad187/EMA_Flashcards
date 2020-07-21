@@ -86,8 +86,11 @@ class EditFragment : Fragment() {
             FCDatabase.getDatabase(requireContext()).repositoryDao().addCard(cross)
 
             cardID = null
-            cardEditFront.setText("")
-            cardEditBack.setText("")
+
+            requireActivity().runOnUiThread {
+                cardEditFront.setText("")
+                cardEditBack.setText("")
+            }
         }
     }
 }

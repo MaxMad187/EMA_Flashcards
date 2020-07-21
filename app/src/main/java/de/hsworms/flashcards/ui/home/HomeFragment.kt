@@ -121,18 +121,5 @@ class HomeFragment : Fragment() {
             // Show the items in the HomeAdapter
             homeAdapter?.items = repositories
         }
-
-        // Test Repo
-        /*val rwc = RepositoryWithCards(
-            repository = Repository(name = "__TEST__"),
-            crossRef = listOf(
-                RepositoryCardCrossRef(1, 1, 0, 0),
-                RepositoryCardCrossRef(1, 2, System.currentTimeMillis() - 1000, 1),
-                RepositoryCardCrossRef(1, 3, System.currentTimeMillis() + 1000000, 1),
-                RepositoryCardCrossRef(1, 4, System.currentTimeMillis() - 1000, -1)
-            )
-        )
-        repositories.add(CardSetItem(rwc))
-        homeAdapter?.items = repositories*/
     }
 }
