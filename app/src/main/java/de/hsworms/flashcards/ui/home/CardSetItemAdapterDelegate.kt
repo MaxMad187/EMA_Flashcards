@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.findFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import de.hsworms.flashcards.MainActivity
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
+import de.hsworms.flashcards.ui.cardlist.CardListFragment
 import kotlinx.android.synthetic.main.list_item_card_set.view.*
 
 /**
@@ -51,7 +55,12 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         private val longTimeCardCountTextView = itemView.listItemCardSetLongTimeCardCountTextView
 
         private val click: View.OnClickListener = View.OnClickListener {
-            Log.i("Flashcard",item.set.repository.name + " was clicked")
+            val time = System.currentTimeMillis()
+            val list = item.set.crossRef.filter { it.nextDate <= time }.toTypedArray()
+            if(list.isNotEmpty()){
+                val bundle = bundleOf("crossRefs" to list)
+                itemView.findFragment<HomeFragment>().findNavController().navigate(R.id.nav_flashcard, bundle)
+            }
         }
 
         /**

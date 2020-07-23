@@ -1,25 +1,19 @@
 package de.hsworms.flashcards.ui.cardlist
 
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import de.hsworms.flashcard.database.entity.FlashcardNormal
-import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
-import de.hsworms.flashcards.MainActivity
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardItem
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
 import kotlinx.android.synthetic.main.list_item_card.view.*
-import kotlinx.android.synthetic.main.list_item_card_set.view.*
 
 /**
  * Adapter delegate for [CardSetItem]

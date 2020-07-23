@@ -22,4 +22,8 @@
     <string name="repositoryEditBackLabelText">Back</string>
     <string name="repositoryEditBackLabelHint">Antwort</string>
     <string name="menu_edit">Edit</string>
+    <string name="menu_flashcard">Flashcard</string>
+    <string name="flashcardShortTime">Nochmal</string>
+    <string name="flashcardMiddleTime">Es Geht So</string>
+    <string name="flashcardLongTime">Gut</string>
 </resources>
