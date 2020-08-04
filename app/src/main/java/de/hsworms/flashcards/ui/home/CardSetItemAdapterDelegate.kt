@@ -1,21 +1,23 @@
 package de.hsworms.flashcards.ui.home
 
-import android.util.Log
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
-import de.hsworms.flashcards.MainActivity
+import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
-import de.hsworms.flashcards.ui.cardlist.CardListFragment
+import kotlinx.android.synthetic.main.alert_dialog.view.dialogCancelBtn
+import kotlinx.android.synthetic.main.delete_dialog.view.*
 import kotlinx.android.synthetic.main.list_item_card_set.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Adapter delegate for [CardSetItem]
@@ -63,6 +65,29 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             }
         }
 
+        private val longClick: View.OnLongClickListener = View.OnLongClickListener {
+            val ctx = itemView.findFragment<HomeFragment>().requireContext()
+            val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.delete_dialog, null)
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
+            val mDeleteDialog = mBuilder.show()
+            mDialogView.dialogDeleteBtn.setOnClickListener {
+                mDeleteDialog.dismiss()
+                GlobalScope.launch {
+                    // delete cards
+                    item.set.cards.forEach {
+                        FCDatabase.getDatabase(ctx).flashcardDao().delete(it)
+                    }
+                    FCDatabase.getDatabase(ctx).repositoryDao().delete(item.set.repository)
+                    itemView.findFragment<HomeFragment>().fetchData()
+                }
+            }
+            mDialogView.dialogCancelBtn.setOnClickListener {
+                mDeleteDialog.dismiss()
+            }
+
+            true
+        }
+
         /**
          * Bind the [CardSetItem] to the view
          */
@@ -82,9 +107,13 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             longTimeCardCountTextView.text = lo.toString()
 
             titleTextView.setOnClickListener(click)
+            titleTextView.setOnLongClickListener(longClick)
             shortTimeCardCountTextView.setOnClickListener(click)
+            shortTimeCardCountTextView.setOnLongClickListener(longClick)
             middleTimeCardCountTextView.setOnClickListener(click)
+            middleTimeCardCountTextView.setOnLongClickListener(longClick)
             longTimeCardCountTextView.setOnClickListener(click)
+            longTimeCardCountTextView.setOnLongClickListener(longClick)
         }
     }
 }

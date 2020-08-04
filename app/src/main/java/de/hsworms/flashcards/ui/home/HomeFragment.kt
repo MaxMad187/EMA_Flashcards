@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
     /**
      * fetches all repositories from the database
      */
-    private fun fetchData() {
+    fun fetchData() {
         repositories.clear()
 
         val ctx = this.requireContext()

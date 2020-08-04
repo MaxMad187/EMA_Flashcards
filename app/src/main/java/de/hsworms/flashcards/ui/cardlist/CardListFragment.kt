@@ -70,7 +70,7 @@ class CardListFragment : Fragment() {
     /**
      * fetches all cards from the database
      */
-    private fun fetchData() {
+    fun fetchData() {
         cards.clear()
 
         val ctx = this.requireContext()

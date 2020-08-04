@@ -1,5 +1,6 @@
 package de.hsworms.flashcards.ui.cardlist
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +9,16 @@ import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
+import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.FlashcardNormal
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardItem
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
+import kotlinx.android.synthetic.main.delete_dialog.view.*
 import kotlinx.android.synthetic.main.list_item_card.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Adapter delegate for [CardSetItem]
@@ -55,6 +60,25 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             itemView.findFragment<CardListFragment>().findNavController().navigate(R.id.nav_edit, bundle)
         }
 
+        private val longClick: View.OnLongClickListener = View.OnLongClickListener {
+            val ctx = itemView.findFragment<CardListFragment>().requireContext()
+            val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.delete_dialog, null)
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + titleTextView.text + "\" löschen") // TODO string externalisieren
+            val mDeleteDialog = mBuilder.show()
+            mDialogView.dialogDeleteBtn.setOnClickListener {
+                mDeleteDialog.dismiss()
+                GlobalScope.launch {
+                    FCDatabase.getDatabase(ctx).flashcardDao().delete(item.card)
+                    itemView.findFragment<CardListFragment>().fetchData()
+                }
+            }
+            mDialogView.dialogCancelBtn.setOnClickListener {
+                mDeleteDialog.dismiss()
+            }
+
+            true
+        }
+
         /**
          * Bind the [CardItem] to the view
          */
@@ -65,7 +89,9 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             repoTextView.text = item.repo.name
 
             titleTextView.setOnClickListener(click)
+            titleTextView.setOnLongClickListener(longClick)
             repoTextView.setOnClickListener(click)
+            repoTextView.setOnLongClickListener(longClick)
         }
     }
 }

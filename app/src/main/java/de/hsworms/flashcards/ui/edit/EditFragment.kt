@@ -46,7 +46,9 @@ class EditFragment : Fragment() {
 
         GlobalScope.launch {
             val repos = FCDatabase.getDatabase(requireContext()).repositoryDao().getAllRepositoriesWithCards().toTypedArray()
-            repositorySpinner.adapter = RepositoryAdapter(requireContext(), android.R.layout.simple_spinner_item, repos)
+            requireActivity().runOnUiThread {
+                repositorySpinner.adapter = RepositoryAdapter(requireContext(), android.R.layout.simple_spinner_item, repos)
+            }
 
             if (arguments?.containsKey("toEdit")!!) {
                 cross = arguments?.get("toEdit") as RepositoryCardCrossRef
