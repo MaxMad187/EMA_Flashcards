@@ -1,6 +1,7 @@
 package de.hsworms.flashcards.ui.cardlist
 
 import android.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,9 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
      * Check, if the type matches this delegate
      */
     override fun isForViewType(item: ListItem, items: MutableList<ListItem>, position: Int): Boolean {
+        Log.i("test", position.toString())
+        Log.i("test", items.joinToString("; "))
+        Log.i("test", item.toString())
         return item is CardItem
     }
 
@@ -43,6 +47,7 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
      * Call [ViewHolder.bind] with the [CardItem] as parameter
      */
     override fun onBindViewHolder(item: CardItem, holder: ViewHolder, payloads: MutableList<Any>) {
+        Log.i("test", (item.card as FlashcardNormal).front)
         holder.bind(item)
     }
 

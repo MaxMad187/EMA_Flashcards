@@ -1,16 +1,19 @@
 package de.hsworms.flashcards.ui.cardlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.hsworms.flashcard.database.FCDatabase
+import de.hsworms.flashcard.database.entity.FlashcardNormal
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardItem
 import de.hsworms.flashcards.ui.ListItem
@@ -52,6 +55,12 @@ class CardListFragment : Fragment() {
 
         bottomAppBarFab.setOnClickListener {
             findNavController().navigate(R.id.nav_edit)
+        }
+
+        searchEditText.addTextChangedListener {
+            val txt = it?.toString()!!
+            cardListAdapter?.search = txt
+            cardListAdapter?.notifyDataSetChanged()
         }
     }
 
