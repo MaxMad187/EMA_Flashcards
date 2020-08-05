@@ -4,18 +4,20 @@ import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import de.hsworms.flashcard.database.FCDatabase
+import de.hsworms.flashcard.database.entity.Repository
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
-import kotlinx.android.synthetic.main.alert_dialog.view.dialogCancelBtn
 import kotlinx.android.synthetic.main.delete_dialog.view.*
 import kotlinx.android.synthetic.main.list_item_card_set.view.*
+import kotlinx.android.synthetic.main.rename_dialog.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -67,6 +69,23 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
 
         private val longClick: View.OnLongClickListener = View.OnLongClickListener {
             val ctx = itemView.findFragment<HomeFragment>().requireContext()
+            val popup = PopupMenu(ctx, it)
+            popup.menuInflater.inflate(R.menu.repository_menu, popup.menu)
+            popup.setOnMenuItemClickListener {mi ->
+                when(mi.itemId) {
+                    R.id.repomenu_rename -> rename()
+                    R.id.repomenu_delete -> delete()
+                    R.id.repomenu_export -> false
+                    else -> false
+                }
+                true
+            }
+            popup.show()
+            true
+        }
+
+        private fun delete() {
+            val ctx = itemView.findFragment<HomeFragment>().requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.delete_dialog, null)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
@@ -84,8 +103,26 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             mDialogView.dialogCancelBtn.setOnClickListener {
                 mDeleteDialog.dismiss()
             }
+        }
 
-            true
+        private fun rename() {
+            val ctx = itemView.findFragment<HomeFragment>().requireContext()
+            val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.rename_dialog, null)
+            mDialogView.dialogNameEt.setText(item.set.repository.name)
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("Kartenstapel umbennen") // TODO string externalisieren
+            val mAlertDialog = mBuilder.show()
+            mDialogView.dialogRenameBtn.setOnClickListener {
+                mAlertDialog.dismiss()
+                val name = mDialogView.dialogNameEt.text.toString()
+                val repo = Repository(item.set.repository.repoId, name)
+                GlobalScope.launch {
+                    FCDatabase.getDatabase(ctx).repositoryDao().update(repo)
+                    itemView.findFragment<HomeFragment>().fetchData()
+                }
+            }
+            mDialogView.dialogRNCancelBtn.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
         }
 
         /**

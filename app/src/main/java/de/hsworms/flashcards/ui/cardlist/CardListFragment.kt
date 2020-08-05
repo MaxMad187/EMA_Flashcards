@@ -20,6 +20,7 @@ import de.hsworms.flashcards.ui.ListItem
 import kotlinx.android.synthetic.main.fragment_cardlist.*
 import kotlinx.android.synthetic.main.fragment_home.bottomAppBar
 import kotlinx.android.synthetic.main.fragment_home.bottomAppBarFab
+import kotlinx.android.synthetic.main.header_layout_generic.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -48,6 +49,9 @@ class CardListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         cardListViewModel.text.observe(viewLifecycleOwner, Observer {
         })
+
+        headerHeadlineTextView.text = "Kartenliste"
+        headerSublineTextView.text = ""
 
         setUpCardListRecyclerView()
 

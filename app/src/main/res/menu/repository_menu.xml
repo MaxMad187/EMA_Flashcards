@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/repomenu_rename"
+        android:title="Umbenennen" />
+    <item
+        android:id="@+id/repomenu_delete"
+        android:title="Löschen" />
+    <item
+        android:id="@+id/repomenu_export"
+        android:title="Exportieren" />
+</menu>

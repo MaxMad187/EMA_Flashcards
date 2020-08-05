@@ -16,6 +16,7 @@ import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import de.hsworms.flashcard.database.entity.RepositoryWithCards
 import de.hsworms.flashcards.R
 import kotlinx.android.synthetic.main.fragment_edit.*
+import kotlinx.android.synthetic.main.header_layout_generic.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -43,6 +44,9 @@ class EditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         editViewModel.text.observe(viewLifecycleOwner, Observer {
         })
+
+        headerHeadlineTextView.text = "Karte bearbeiten/erstellen"
+        headerSublineTextView.text = ""
 
         GlobalScope.launch {
             val repos = FCDatabase.getDatabase(requireContext()).repositoryDao().getAllRepositoriesWithCards().toTypedArray()

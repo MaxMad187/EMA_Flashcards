@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,11 +15,11 @@ import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import de.hsworms.flashcards.R
 import kotlinx.android.synthetic.main.flashcard_layout.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.header_layout_flashcard.*
 import kotlinx.android.synthetic.main.sec_header_time_view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
-import kotlin.properties.Delegates
 
 class FlashcardFragment : Fragment() {
 
@@ -50,6 +49,9 @@ class FlashcardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         flashcardViewModel.text.observe(viewLifecycleOwner, Observer {
         })
+
+        headerHeadlineTextView.text = "Kartenset lernen"
+        headerSublineTextView.text = ""
 
         val crossRef = arguments?.get("crossRefs") as Array<RepositoryCardCrossRef>
         repoID = crossRef[0].repoId

@@ -17,6 +17,7 @@ import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
 import kotlinx.android.synthetic.main.alert_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.header_layout_generic.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -47,6 +48,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
         })
+
+        headerHeadlineTextView.text = "Kartensetliste"
+        headerSublineTextView.text = ""
 
         // Show the create set dialog on FAB click
         bottomAppBarFab.setOnClickListener { showCreateSetDialog() }
