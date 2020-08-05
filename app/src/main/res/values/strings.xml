@@ -26,4 +26,5 @@
     <string name="flashcardShortTime">Nochmal</string>
     <string name="flashcardMiddleTime">Es Geht So</string>
     <string name="flashcardLongTime">Gut</string>
+    <string name="menu_darkmode">Darkmode</string>
 </resources>

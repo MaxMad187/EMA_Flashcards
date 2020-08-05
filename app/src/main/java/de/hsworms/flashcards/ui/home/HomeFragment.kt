@@ -123,7 +123,7 @@ class HomeFragment : Fragment() {
 
             // Show the items in the HomeAdapter
             homeAdapter?.items = repositories
-            requireActivity().runOnUiThread {
+            activity?.runOnUiThread {
                 homeAdapter?.notifyDataSetChanged()
             }
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -13,5 +14,12 @@
             android:id="@+id/nav_cardlist"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_cardlist" />
+
+        <item
+            android:id="@+id/menu_darkmode"
+            android:title="@string/menu_darkmode"
+            app:actionViewClass="androidx.appcompat.widget.SwitchCompat"
+            app:showAsAction="always"
+            android:icon="@drawable/ic_baseline_nights_stay_24"/>
     </group>
 </menu>
