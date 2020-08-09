@@ -1,6 +1,8 @@
 package de.hsworms.flashcards
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
@@ -14,9 +16,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import de.hsworms.flashcard.database.FCDatabase
+import de.hsworms.flashcard.database.entity.FlashcardNormal
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.BufferedWriter
+import java.io.OutputStreamWriter
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val SAVE_DIALOG: Int = 404
+        var SAVE_REPO_ID: Int = -1
+    }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -70,5 +85,38 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // FOR THE EXPORTING
+        if(requestCode == SAVE_DIALOG) {
+            if(resultCode == Activity.RESULT_OK) {
+                val uri = data?.data!!
+                GlobalScope.launch {
+                    val repo = FCDatabase.getDatabase(applicationContext).repositoryDao().getRepositoryWithCards(SAVE_REPO_ID)!!
+                    val obj = JSONObject()
+                    obj.put("name", repo.repository.name)
+                    val cards = JSONArray()
+                    repo.cards.forEach {
+                        val card = JSONObject()
+                        card.put("type", it.type)
+                        val fc = FCDatabase.getDatabase(applicationContext).flashcardDao().getOne(it.cardId!!)
+                        if(fc is FlashcardNormal) {
+                            card.put("front", fc.front)
+                            card.put("back", fc.back)
+                        }
+                        cards.put(card)
+                    }
+                    obj.put("cards", cards)
+                    val bw = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(uri)))
+                    bw.write(obj.toString())
+                    bw.flush()
+                    bw.close()
+                }
+            }
+        }
+        // FOR THE IMPORTING
+        // TODO
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

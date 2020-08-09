@@ -1,6 +1,7 @@
 package de.hsworms.flashcards.ui.home
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.Repository
+import de.hsworms.flashcards.MainActivity
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
@@ -75,13 +77,21 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                 when(mi.itemId) {
                     R.id.repomenu_rename -> rename()
                     R.id.repomenu_delete -> delete()
-                    R.id.repomenu_export -> false
+                    R.id.repomenu_export -> export()
                     else -> false
                 }
                 true
             }
             popup.show()
             true
+        }
+
+        private fun export() {
+            val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
+            intent.type = "application/json"
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            MainActivity.SAVE_REPO_ID = item.set.repository.repoId!!
+            itemView.findFragment<HomeFragment>().activity?.startActivityForResult(intent, MainActivity.SAVE_DIALOG)
         }
 
         private fun delete() {
