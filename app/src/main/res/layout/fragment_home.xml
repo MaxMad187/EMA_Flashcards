@@ -28,7 +28,9 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragmentHomeHeaderConstraintLayout"
-            tools:listitem="@layout/list_item_card_set" />
+            tools:listitem="@layout/list_item_card_set"
+            android:paddingBottom="100dp"
+            android:clipToPadding="false"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
