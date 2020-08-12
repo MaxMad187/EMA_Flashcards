@@ -47,10 +47,15 @@ interface FlashcardDao {
      * Inserts one or more [Flashcard] according to their type.
      *
      * @param flashcard The [Flashcard]s to insert.
+     *
+     * @return The IDs of the new cards
      */
-    fun insert(vararg flashcard: Flashcard) {
-        insertAbstract(*flashcard)
-        insertNormal(*flashcard.filterIsInstance<FlashcardNormal>().toTypedArray())
+    fun insert(vararg flashcard: Flashcard) : List<Long> {
+        val list = ArrayList<Long>()
+        list.addAll(insertAbstract(*flashcard))
+
+        list.addAll(insertNormal(*flashcard.filterIsInstance<FlashcardNormal>().toTypedArray()))
+        return list
     }
 
     /**
@@ -75,9 +80,11 @@ interface FlashcardDao {
      * Inserts one or more [Flashcard].
      *
      * @param flashcard The [Flashcard]s to insert.
+     *
+     * @return The IDs of the new Cards
      */
     @Insert
-    fun insertAbstract(vararg  flashcard: Flashcard)
+    fun insertAbstract(vararg  flashcard: Flashcard) : Array<Long>
 
     /**
      * Gets the [Flashcard.type] of a [Flashcard].
@@ -124,9 +131,11 @@ interface FlashcardDao {
      * Inserts one or more [FlashcardNormal].
      *
      * @param flashcard The [FlashcardNormal]s to insert.
+     *
+     * @return The IDs of the new cards
      */
     @Insert
-    fun insertNormal(vararg flashcard: FlashcardNormal)
+    fun insertNormal(vararg flashcard: FlashcardNormal) : Array<Long>
 
     /**
      * Updates one or more [FlashcardNormal]

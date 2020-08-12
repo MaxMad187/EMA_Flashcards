@@ -6,10 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.hsworms.flashcard.database.dao.FlashcardDao
 import de.hsworms.flashcard.database.dao.RepositoryDao
-import de.hsworms.flashcard.database.entity.FlashcardNormal
-import de.hsworms.flashcard.database.entity.Repository
-import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
-import de.hsworms.flashcard.database.entity.RepositoryWithCards
+import de.hsworms.flashcard.database.entity.*
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -57,7 +54,7 @@ class RepositoryTest {
     fun addGetRemoveCards() {
         repositoryDao.insert(Repository(name = ""))
         flashcardDao.insert(FlashcardNormal("test", "abc"))
-        repositoryDao.addCard(RepositoryCardCrossRef(1,1))
+        repositoryDao.addCard(RepositoryCardCrossRef(1,1, 0, 0))
 
         val repo = repositoryDao.getRepositoryWithCards(1)!!
         Assert.assertEquals(1, repo.cards.size)
@@ -67,7 +64,7 @@ class RepositoryTest {
         Assert.assertEquals("test", card.front)
         Assert.assertEquals("abc", card.back)
 
-        repositoryDao.removeCard(RepositoryCardCrossRef(1, 1L))
+        repositoryDao.removeCard(RepositoryCardCrossRef(1, 1L, 0, 0))
 
         Assert.assertEquals(0, repositoryDao.getRepositoryWithCards(1)!!.cards.size)
     }
@@ -83,5 +80,36 @@ class RepositoryTest {
 
         val repo2 = repositoryDao.getRepository(1)!!
         Assert.assertEquals("Test2", repo2.name)
+    }
+
+    @Test
+    fun crossRefTest() {
+        repositoryDao.insert(Repository(name = "Test"))
+        flashcardDao.insert(FlashcardNormal(front="test", back="test"))
+
+        repositoryDao.addCard(RepositoryCardCrossRef(1, 1, 5, 1000))
+
+        val rwc = repositoryDao.getRepositoryWithCards(1)!!
+
+        val cross = rwc.crossRef[0]
+        Assert.assertEquals(5, cross.nextDate)
+        Assert.assertEquals(1000, cross.interval)
+    }
+
+    @Test
+    fun updateCrossRef() {
+        repositoryDao.insert(Repository(name = "Test"))
+        flashcardDao.insert(FlashcardNormal(front="test", back="test"))
+
+        repositoryDao.addCard(RepositoryCardCrossRef(1, 1, 5, 1000))
+
+        val rccr = RepositoryCardCrossRef(1, 1, 7, 10)
+        repositoryDao.update(rccr)
+
+        val rwc = repositoryDao.getRepositoryWithCards(1)!!
+
+        val cross = rwc.crossRef[0]
+        Assert.assertEquals(7, cross.nextDate)
+        Assert.assertEquals(10, cross.interval)
     }
 }

@@ -24,6 +24,7 @@
         app:layout_constraintVertical_bias="0.526"
         app:srcCompat="@drawable/ic_avatar" />
 
+    <!-- Don't know what to do with them
     <ImageView
         android:id="@+id/headerFavoriteImageView"
         android:layout_width="36dp"
@@ -44,6 +45,7 @@
         app:layout_constraintEnd_toStartOf="@id/headerFavoriteImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/abc_vector_test" />
+        -->
 
     <TextView
         android:id="@+id/headerHeadlineTextView"
@@ -57,9 +59,10 @@
         android:text="Modul"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/headerAvatarImageView"
         app:layout_constraintTop_toTopOf="parent" />
+        <!-- app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView" -->
 
     <TextView
         android:id="@+id/headerSublineTextView"
@@ -74,8 +77,9 @@
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/headerAvatarImageView"
         app:layout_constraintTop_toBottomOf="@id/headerHeadlineTextView" />
+        <!-- app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView" -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

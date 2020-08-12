@@ -1,6 +1,7 @@
 package de.hsworms.flashcards.ui.home
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +11,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import de.hsworms.flashcard.database.FCDatabase
+import de.hsworms.flashcard.database.entity.Repository
 import de.hsworms.flashcards.R
-import de.hsworms.flashcards.model.Set
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
 import kotlinx.android.synthetic.main.alert_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.header_layout_generic.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     // The adapter for the list on the home screen
     private var homeAdapter: HomeAdapter? = null
-    private var testItems: MutableList<ListItem> = mutableListOf()
+    private var repositories: MutableList<ListItem> = mutableListOf()
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -45,6 +50,9 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
+        headerHeadlineTextView.text = "Kartensetliste"
+        headerSublineTextView.text = ""
+
         // Show the create set dialog on FAB click
         bottomAppBarFab.setOnClickListener { showCreateSetDialog() }
 
@@ -52,7 +60,7 @@ class HomeFragment : Fragment() {
         setUpHomeRecyclerView()
 
         // Show example items
-        createSampleCardStackData()
+        fetchData()
     }
 
     private fun setUpHomeRecyclerView() {
@@ -73,7 +81,7 @@ class HomeFragment : Fragment() {
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(requireContext())
             .setView(mDialogView)
-            .setTitle("Kartenstapel erstellen")
+            .setTitle("Kartenstapel erstellen") // TODO string externalisieren
         val mAlertDialog = mBuilder.show()
         mDialogView.dialogCreateBtn.setOnClickListener {
             mAlertDialog.dismiss()
@@ -87,44 +95,42 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Add a new card set to the temporary [testItems]
-     * TODO: Use database instead of [testItems]
+     * Add a new card set to the database
      */
     private fun addSetItem(name: String) {
-        val set = Set(
-            id = 1,
-            name = name,
-            shortTimeCardCount = 0,
-            middleTimeCardCount = 0,
-            longTimeCardCount = 0
-        )
-        testItems.add(CardSetItem(set))
-        // Update the adapter
-        homeAdapter?.items = testItems
+        val ctx = this.requireContext()
+
+        GlobalScope.launch {
+            val repo = Repository(null, name)
+            val id = FCDatabase.getDatabase(ctx).repositoryDao().insert(repo)
+            val cr = FCDatabase.getDatabase(ctx).repositoryDao().getRepositoryWithCards(id[0].toInt())!!
+            repositories.add(CardSetItem(cr))
+
+            // Update the adapter
+            homeAdapter?.items = repositories
+            requireActivity().runOnUiThread {
+                homeAdapter?.notifyDataSetChanged()
+            }
+        }
     }
 
-    private fun createSampleCardStackData() {
-        val cardSet1 = Set(
-            id = 1,
-            name = "IT-Sicherheit",
-            shortTimeCardCount = 12,
-            middleTimeCardCount = 13,
-            longTimeCardCount = 14
-        )
-        val cardSetItem1 = CardSetItem(cardSet1)
-        testItems.add(cardSetItem1)
+    /**
+     * fetches all repositories from the database
+     */
+    fun fetchData() {
+        repositories.clear()
 
-        val cardSet2 = Set(
-            id = 2,
-            name = "EMA",
-            shortTimeCardCount = 12,
-            middleTimeCardCount = 13,
-            longTimeCardCount = 14
-        )
-        val cardSetItem2 = CardSetItem(cardSet2)
-        testItems.add(cardSetItem2)
+        val ctx = this.requireContext()
+        GlobalScope.launch {
+            FCDatabase.getDatabase(ctx).repositoryDao().getAllRepositoriesWithCards().forEach {
+                repositories.add(CardSetItem(it))
+            }
 
-        // Show the items in the HomeAdapter
-        homeAdapter?.items = testItems
+            // Show the items in the HomeAdapter
+            homeAdapter?.items = repositories
+            activity?.runOnUiThread {
+                homeAdapter?.notifyDataSetChanged()
+            }
+        }
     }
 }

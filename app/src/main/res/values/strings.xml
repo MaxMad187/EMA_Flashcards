@@ -27,4 +27,18 @@
     <string name="edit_note_main_catchphrase">Schlagwort</string>
     <string name="edit_note_main_card_button">Karte: Card 1</string>
     <string name="edit_note_main_content_description_back_arrow">Zurück</string>
+
+    <string name="menu_cardlist">Kartenansicht</string>
+    <string name="searchEditTextHint">Suchen...</string>
+    <string name="repositorySpinnerLabelText">Stapel:</string>
+    <string name="repositoryEditFrontLabelText">Front</string>
+    <string name="repositoryEditFrontLabelHint">Frage</string>
+    <string name="repositoryEditBackLabelText">Back</string>
+    <string name="repositoryEditBackLabelHint">Antwort</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_flashcard">Flashcard</string>
+    <string name="flashcardShortTime">Nochmal</string>
+    <string name="flashcardMiddleTime">Es Geht So</string>
+    <string name="flashcardLongTime">Gut</string>
+    <string name="menu_darkmode">Darkmode</string>
 </resources>
