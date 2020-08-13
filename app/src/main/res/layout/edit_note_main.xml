@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainAttitudeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#808080">
+
+        <ImageView
+            android:id="@+id/mainAttitudeArrow"
+            android:layout_width="62dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_back"
+            android:contentDescription="@string/edit_note_main_content_description_back_arrow" />
+
+        <TextView
+            android:id="@+id/mainAttitudeProfileTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/edit_note_main_edit_note"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mainAttitudeArrow"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/editNoteMainTypeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/edit_note_main_typ"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/editNoteMainStackText"
+            app:layout_constraintEnd_toStartOf="@+id/editNoteMainTypeSelection"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:navigationIcon="@drawable/ic_menu" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/editNoteMainTypeSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/editNoteMainTypeText"
+            app:layout_constraintTop_toTopOf="@id/editNoteMainTypeText" />
+
+        <TextView
+            android:id="@+id/editNoteMainStackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_note_main_set"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/editNoteMainFrontViewText"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/editNoteMainTypeText"
+            app:layout_constraintTop_toBottomOf="@+id/editNoteMainTypeText" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/editNoteMainStackSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:textSize="18sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/editNoteMainStackText"
+            app:layout_constraintTop_toTopOf="@+id/editNoteMainStackText" />
+
+        <TextView
+            android:id="@+id/editNoteMainFrontViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="200dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/edit_note_main_front"
+            app:layout_constraintBottom_toTopOf="@+id/editNoteMainQuestionEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editNoteMainQuestionEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/edit_note_main_edit_text_horizontal_margin"
+            android:layout_marginEnd="@dimen/edit_note_main_edit_text_horizontal_margin"
+            android:layout_marginBottom="20dp"
+            android:autofillHints=""
+            android:drawableEnd="@drawable/ic_attachment"
+            android:ems="10"
+            android:hint="@string/edit_note_main_question"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/editNoteMainBackViewText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/editNoteMainBackViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="200dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/edit_note_main_back"
+            app:layout_constraintBottom_toTopOf="@+id/editNoteMainAnswerEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="51dp" />
+
+        <EditText
+            android:id="@+id/editNoteMainAnswerEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/edit_note_main_edit_text_horizontal_margin"
+            android:layout_marginEnd="@dimen/edit_note_main_edit_text_horizontal_margin"
+            android:layout_marginBottom="20dp"
+            android:autofillHints=""
+            android:drawableEnd="@drawable/ic_attachment"
+            android:ems="10"
+            android:hint="@string/edit_note_main_answer"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/editNoteMainCatchphraseButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/editNoteMainCatchphraseButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/edit_note_main_catchphrase"
+            app:backgroundTint="#363742"
+            app:layout_constraintBottom_toTopOf="@+id/editNoteMainCardButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/editNoteMainCardButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="130dp"
+            android:text="@string/edit_note_main_card_button"
+            app:backgroundTint="#363742"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="#808080"
+        app:fabCradleMargin="7dp"
+        app:fabCradleRoundedCornerRadius="27dp"
+        app:fabCradleVerticalOffset="5dp"
+        app:menu='@menu/app_bar_menu'
+        app:navigationIcon="@drawable/ic_menu" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:backgroundTint='#363742'
+        app:layout_anchor="@id/toolbar"
+        app:maxImageSize="35dp"
+        app:tint='@color/colorWhite' />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

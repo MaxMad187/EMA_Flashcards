@@ -7,6 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Menus -->
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -14,6 +15,19 @@
     <string name="home_second">Home Second</string>
     <string name="about">About</string>
     <string name="settings">Settings</string>
+
+    <!-- Edit Note -->
+    <string name="edit_note_main_edit_note">Notiz bearbeiten</string>
+    <string name="edit_note_main_typ">Typ:</string>
+    <string name="edit_note_main_set">Stapel:</string>
+    <string name="edit_note_main_front">Vorderseite</string>
+    <string name="edit_note_main_question">Frage</string>
+    <string name="edit_note_main_back">Rückseite</string>
+    <string name="edit_note_main_answer">Antwort</string>
+    <string name="edit_note_main_catchphrase">Schlagwort</string>
+    <string name="edit_note_main_card_button">Karte: Card 1</string>
+    <string name="edit_note_main_content_description_back_arrow">Zurück</string>
+
     <string name="menu_cardlist">Kartenansicht</string>
     <string name="searchEditTextHint">Suchen...</string>
     <string name="repositorySpinnerLabelText">Stapel:</string>
@@ -27,4 +41,7 @@
     <string name="flashcardMiddleTime">Es Geht So</string>
     <string name="flashcardLongTime">Gut</string>
     <string name="menu_darkmode">Darkmode</string>
+    <string name="profileCollectionViewEnterName">Name</string>
+    <string name="profileCollectionViewAvatarText">Avatar</string>
+    <string name="mainAttitudeProfileTextView">Profil</string>
 </resources>

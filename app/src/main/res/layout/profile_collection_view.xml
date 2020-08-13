@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileCollectionViewAttitudeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/profileCollectionViewHeaderAvatarImageView"
+            android:layout_width="36dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@null"
+            android:tint="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_avatar" />
+
+        <TextView
+            android:id="@+id/profileCollectionViewProfileTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="@string/mainAttitudeProfileTextView"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileCollectionViewHeaderAvatarImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/profileCollectionViewClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="110dp"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toStartOf="@+id/profileCollectionViewEnterNameEditText"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileCollectionViewAvatarChangeImageView"
+        app:srcCompat="@drawable/ic_close" />
+
+    <EditText
+        android:id="@+id/profileCollectionViewEnterNameEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:autofillHints=""
+        android:hint="@string/profileCollectionViewEnterName"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@id/profileCollectionViewClose"
+        app:layout_constraintEnd_toStartOf="@id/profileCollectionViewCollectImageView"
+        app:layout_constraintStart_toEndOf="@+id/profileCollectionViewClose"
+        app:layout_constraintTop_toTopOf="@id/profileCollectionViewClose" />
+
+    <ImageView
+        android:id="@+id/profileCollectionViewCollectImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@id/profileCollectionViewEnterNameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileCollectionViewEnterNameEditText"
+        app:layout_constraintTop_toTopOf="@id/profileCollectionViewEnterNameEditText"
+        app:srcCompat="@drawable/ic_send" />
+
+    <ImageView
+        android:id="@+id/profileCollectionViewAvatarChangeImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileCollectionViewAttitudeHeader"
+        app:srcCompat="@drawable/ic_avatar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

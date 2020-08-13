@@ -3,6 +3,6 @@
     <color name="colorPrimary">#3F5185</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF5252</color>
-    <color name="colorwhite">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorAppBarBackground">#363742</color>
 </resources>
