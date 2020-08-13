@@ -5,22 +5,22 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mainAttitudeHeader"
+        android:id="@+id/profileCollectionViewAttitudeHeader"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#808080"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/mainAttitudeHeaderAvatarImageView"
+            android:id="@+id/profileCollectionViewHeaderAvatarImageView"
             android:layout_width="36dp"
             android:layout_height="31dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="@null"
             android:tint="#ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,94 +28,70 @@
             app:srcCompat="@drawable/ic_avatar" />
 
         <TextView
-            android:id="@+id/mainAttitudeProfileTextView"
+            android:id="@+id/profileCollectionViewProfileTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#FFFFFF"
-            android:text="Profilauswahl"
+            android:text="@string/mainAttitudeProfileTextView"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/mainAttitudeHeaderAvatarImageView"
+            app:layout_constraintStart_toEndOf="@+id/profileCollectionViewHeaderAvatarImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/profile_collection_view_close"
+        android:id="@+id/profileCollectionViewClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="400dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/profileCollectionViewEnterName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="110dp"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toStartOf="@+id/profileCollectionViewEnterNameEditText"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainAttitudeHeader"
+        app:layout_constraintTop_toBottomOf="@id/profileCollectionViewAvatarChangeImageView"
         app:srcCompat="@drawable/ic_close" />
 
-
     <EditText
-        android:id="@+id/profileCollectionViewEnterName"
+        android:id="@+id/profileCollectionViewEnterNameEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:autofillHints=""
+        android:hint="@string/profileCollectionViewEnterName"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@id/profileCollectionViewClose"
+        app:layout_constraintEnd_toStartOf="@id/profileCollectionViewCollectImageView"
+        app:layout_constraintStart_toEndOf="@+id/profileCollectionViewClose"
+        app:layout_constraintTop_toTopOf="@id/profileCollectionViewClose" />
+
+    <ImageView
+        android:id="@+id/profileCollectionViewCollectImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginBottom="400dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_collection_view_close"
-        app:layout_constraintTop_toBottomOf="@+id/mainAttitudeHeader" />
-
-    <ImageView
-        android:id="@+id/profileCollectionViewCollect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="400dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@id/profileCollectionViewEnterNameEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileCollectionViewEnterName"
-        app:layout_constraintTop_toBottomOf="@id/mainAttitudeHeader"
+        app:layout_constraintStart_toEndOf="@+id/profileCollectionViewEnterNameEditText"
+        app:layout_constraintTop_toTopOf="@id/profileCollectionViewEnterNameEditText"
         app:srcCompat="@drawable/ic_send" />
 
     <ImageView
-        android:id="@+id/profileCollectionViewAvatarChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="330dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/profileCollectionViewAvatarChangeImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@null"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_collection_view_close"
+        app:layout_constraintTop_toBottomOf="@+id/profileCollectionViewAttitudeHeader"
         app:srcCompat="@drawable/ic_avatar" />
-
-    <EditText
-        android:id="@+id/profileCollectionViewAvatarText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="350dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Avatar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileCollectionViewAvatarChange"
-        app:layout_constraintTop_toBottomOf="@+id/profileCollectionViewEnterName" />
-
-    <ImageView
-        android:id="@+id/profileCollectionViewLoad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="330dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileCollectionViewAvatarText"
-        app:layout_constraintTop_toBottomOf="@+id/profileCollectionViewCollect"
-        app:srcCompat="@drawable/ic_attachment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,4 +41,7 @@
     <string name="flashcardMiddleTime">Es Geht So</string>
     <string name="flashcardLongTime">Gut</string>
     <string name="menu_darkmode">Darkmode</string>
+    <string name="profileCollectionViewEnterName">Name</string>
+    <string name="profileCollectionViewAvatarText">Avatar</string>
+    <string name="mainAttitudeProfileTextView">Profil</string>
 </resources>
