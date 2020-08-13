@@ -95,7 +95,8 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         }
 
         private fun delete() {
-            val ctx = itemView.findFragment<HomeFragment>().requireContext()
+            val frag = itemView.findFragment<HomeFragment>();
+            val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.delete_dialog, null)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
@@ -107,7 +108,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                         FCDatabase.getDatabase(ctx).flashcardDao().delete(it)
                     }
                     FCDatabase.getDatabase(ctx).repositoryDao().delete(item.set.repository)
-                    itemView.findFragment<HomeFragment>().fetchData()
+                    frag.fetchData()
                 }
             }
             mDialogView.dialogCancelBtn.setOnClickListener {
@@ -116,7 +117,8 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         }
 
         private fun rename() {
-            val ctx = itemView.findFragment<HomeFragment>().requireContext()
+            val frag = itemView.findFragment<HomeFragment>();
+            val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.rename_dialog, null)
             mDialogView.dialogNameEt.setText(item.set.repository.name)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("Kartenstapel umbennen") // TODO string externalisieren
@@ -127,7 +129,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                 val repo = Repository(item.set.repository.repoId, name)
                 GlobalScope.launch {
                     FCDatabase.getDatabase(ctx).repositoryDao().update(repo)
-                    itemView.findFragment<HomeFragment>().fetchData()
+                    frag.fetchData()
                 }
             }
             mDialogView.dialogRNCancelBtn.setOnClickListener {
