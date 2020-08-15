@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="38dp"
     android:layout_marginTop="48dp"
-    android:background="#C6C6C6"
+    android:background="#2F0B91D9"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
