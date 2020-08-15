@@ -4,7 +4,7 @@
     android:id="@+id/headerAvatarContainerConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#808080"
+    android:background="#0B4CD9"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -62,7 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/headerAvatarImageView"
         app:layout_constraintTop_toTopOf="parent" />
-        <!-- app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView" -->
 
     <TextView
         android:id="@+id/headerSublineTextView"
@@ -80,6 +79,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/headerAvatarImageView"
         app:layout_constraintTop_toBottomOf="@id/headerHeadlineTextView" />
-        <!-- app:layout_constraintEnd_toStartOf="@id/headerBackArrowImageView" -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
