@@ -23,68 +23,68 @@
             android:id="@+id/repositorySpinnerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragmentHomeHeaderConstraintLayout"
-            android:text="@string/repositorySpinnerLabelText"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
+            android:text="@string/repository_spinner_label_text"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragmentHomeHeaderConstraintLayout" />
 
         <Spinner
             android:id="@+id/repositorySpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/repositorySpinnerLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragmentHomeHeaderConstraintLayout"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp" />
+            android:layout_marginEnd="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/repositorySpinnerLabel"
+            app:layout_constraintTop_toBottomOf="@+id/fragmentHomeHeaderConstraintLayout" />
 
         <TextView
             android:id="@+id/cardEditFrontLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/repositoryEditFrontLabelText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repositorySpinnerLabel"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textSize="18sp" />
+            android:text="@string/repository_edit_front_label_text"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repositorySpinnerLabel" />
 
         <EditText
             android:id="@+id/cardEditFront"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardEditFrontLabel"
-            android:hint="@string/repositoryEditFrontLabelHint"
+            android:hint="@string/repository_edit_front_label_hint"
             android:paddingLeft="60dp"
-            android:paddingRight="60dp" />
+            android:paddingRight="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardEditFrontLabel" />
 
         <TextView
             android:id="@+id/cardEditBackLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/repositoryEditBackLabelText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardEditFront"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textSize="18sp" />
+            android:text="@string/repository_edit_back_label_text"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardEditFront" />
 
         <EditText
             android:id="@+id/cardEditBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardEditBackLabel"
-            android:hint="@string/repositoryEditBackLabelHint"
+            android:hint="@string/repository_edit_back_label_hint"
             android:paddingLeft="60dp"
-            android:paddingRight="60dp" />
+            android:paddingRight="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardEditBackLabel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,19 +93,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#808080"
+        app:backgroundTint="#0B4CD9"
         app:fabCradleMargin="7dp"
         app:fabCradleRoundedCornerRadius="27dp"
         app:fabCradleVerticalOffset="5dp"
-        app:menu='@menu/app_bar_menu'
         app:navigationIcon="@drawable/ic_back" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bottomAppBarFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        app:backgroundTint='@color/colorAppBarBackground'
+        android:src="@drawable/ic_baseline_check_24"
+        app:backgroundTint='#0B4CD9'
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="35dp"
         app:tint='@color/colorWhite' />

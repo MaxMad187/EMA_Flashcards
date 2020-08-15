@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
@@ -49,8 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         // Dark mode
         pref = getPreferences(Context.MODE_PRIVATE)
-        darkmode = pref.getBoolean("darkmode", resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
-        when(darkmode) {
+        darkmode = pref.getBoolean(
+            "darkmode",
+            resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+        )
+        when (darkmode) {
             true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
@@ -59,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val switch = item.actionView as SwitchCompat
         switch.isChecked = darkmode
         switch.setOnCheckedChangeListener { _, b ->
-            when(b) {
+            when (b) {
                 true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
@@ -76,12 +78,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -89,8 +85,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // FOR THE EXPORTING
-        if(requestCode == SAVE_DIALOG) {
-            if(resultCode == Activity.RESULT_OK) {
+        if (requestCode == SAVE_DIALOG) {
+            if (resultCode == Activity.RESULT_OK) {
                 val uri = data?.data!!
                 GlobalScope.launch {
                     val repo = FCDatabase.getDatabase(applicationContext).repositoryDao().getRepositoryWithCards(SAVE_REPO_ID)!!
@@ -101,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                         val card = JSONObject()
                         card.put("type", it.type)
                         val fc = FCDatabase.getDatabase(applicationContext).flashcardDao().getOne(it.cardId!!)
-                        if(fc is FlashcardNormal) {
+                        if (fc is FlashcardNormal) {
                             card.put("front", fc.front)
                             card.put("back", fc.back)
                         }
