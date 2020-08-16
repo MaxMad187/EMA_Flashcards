@@ -74,7 +74,7 @@
         android:layout_height="58dp"
         android:layout_marginBottom="24dp"
         android:text="@string/main_attitude_delete_button"
-        app:backgroundTint="#0BB9D9"
+        app:backgroundTint="#DC0B91D9"
         app:layout_constraintBottom_toTopOf="@+id/mainAttitudeCloseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
