@@ -75,9 +75,9 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             popup.menuInflater.inflate(R.menu.repository_menu, popup.menu)
             popup.setOnMenuItemClickListener {mi ->
                 when(mi.itemId) {
-                    R.id.repomenu_rename -> rename()
-                    R.id.repomenu_delete -> delete()
-                    R.id.repomenu_export -> export()
+                    R.id.repository_menu_rename -> rename()
+                    R.id.repository_menu_delete -> delete()
+                    R.id.repository_menu_export -> export()
                     else -> false
                 }
                 true

@@ -17,18 +17,24 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.FlashcardNormal
+import de.hsworms.flashcard.database.entity.Repository
+import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
+import de.hsworms.flashcards.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.BufferedReader
 import java.io.BufferedWriter
+import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         const val SAVE_DIALOG: Int = 404
+        const val OPEN_DIALOG: Int = 405
         var SAVE_REPO_ID: Int = -1
     }
 
@@ -112,7 +118,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
         // FOR THE IMPORTING
-        // TODO
+        if(requestCode == OPEN_DIALOG) {
+            if (resultCode == Activity.RESULT_OK) {
+                val uri = data?.data!!
+                GlobalScope.launch {
+                    val br = BufferedReader(InputStreamReader(contentResolver.openInputStream(uri)))
+                    val str = br.readText()
+                    br.close()
+
+                    val jobj = JSONObject(str)
+                    val repo = Repository(name = jobj.getString("name"))
+                    val id = FCDatabase.getDatabase(applicationContext).repositoryDao().insert(repo)[0].toInt()
+                    val arr = jobj.getJSONArray("cards")
+                    for(i in 1..arr.length()) {
+                        val c = arr.getJSONObject(i - 1)
+                        val fc = FlashcardNormal(front = c.getString("front"), back = c.getString("back"))
+                        FCDatabase.getDatabase(applicationContext).apply {
+                            val cid = flashcardDao().insert(fc)[0]
+                            repositoryDao().addCard(RepositoryCardCrossRef(id, cid, 0, 0))
+                        }
+                    }
+                    runOnUiThread {
+                        val curr = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments!![0]
+                        if(curr is HomeFragment) {
+                            curr.fetchData()
+                        }
+                    }
+                }
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data)
     }
 }

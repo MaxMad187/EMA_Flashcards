@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.Repository
+import de.hsworms.flashcards.MainActivity
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
@@ -54,7 +57,7 @@ class HomeFragment : Fragment() {
         headerSublineTextView.text = ""
 
         // Show the create set dialog on FAB click
-        bottomAppBarFab.setOnClickListener { showCreateSetDialog() }
+        bottomAppBarFab.setOnClickListener { showCreatePopUp() }
 
         // Set Up the list on the home screen
         setUpHomeRecyclerView()
@@ -73,6 +76,28 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
         }
+    }
+
+    private fun import() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.type = "application/json"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        activity?.startActivityForResult(intent, MainActivity.OPEN_DIALOG)
+    }
+
+    private fun showCreatePopUp() {
+        val ctx = requireContext()
+        val popup = PopupMenu(ctx, bottomAppBarFab)
+        popup.menuInflater.inflate(R.menu.create_menu, popup.menu)
+        popup.setOnMenuItemClickListener { mi ->
+            when(mi.itemId) {
+                R.id.create_menu_create -> showCreateSetDialog()
+                R.id.create_menu_import -> import()
+                else -> false
+            }
+            true
+        }
+        popup.show()
     }
 
     private fun showCreateSetDialog() {
