@@ -80,7 +80,6 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                     R.id.repository_menu_delete -> delete()
                     R.id.repository_menu_export -> export()
                     R.id.repository_menu_reset -> reset()
-                    else -> false
                 }
                 true
             }
@@ -93,15 +92,16 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
-                .setTitle("\"" + item.set.repository.name + "\" zurücksetzen") // TODO string externalisieren
+                .setTitle(frag.getString(R.string.popup_reset, item.set.repository.name))
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // reset cards
-                    item.set.cards.forEach {
-                        FCDatabase.getDatabase(ctx).repositoryDao()
-                            .update(RepositoryCardCrossRef(item.set.repository.repoId!!, it.cardId!!, 0, 0))
+                    FCDatabase.getDatabase(ctx).apply {
+                        item.set.cards.forEach {
+                            repositoryDao().update(RepositoryCardCrossRef(item.set.repository.repoId!!, it.cardId!!, 0, 0))
+                        }
                     }
                     frag.fetchData()
                 }
@@ -124,16 +124,19 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
-                .setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
+                .setTitle(frag.getString(R.string.popup_delete, item.set.repository.name))
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // delete cards
-                    item.set.cards.forEach {
-                        FCDatabase.getDatabase(ctx).flashcardDao().delete(it)
+                    FCDatabase.getDatabase(ctx).apply {
+                        item.set.cards.forEach {
+                            flashcardDao().delete(it)
+                        }
+                        repositoryDao().delete(item.set.repository)
                     }
-                    FCDatabase.getDatabase(ctx).repositoryDao().delete(item.set.repository)
+
                     frag.fetchData()
                 }
             }
@@ -148,7 +151,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.rename_dialog, null)
             mDialogView.dialog_name_et.setText(item.set.repository.name)
             val mBuilder =
-                AlertDialog.Builder(ctx).setView(mDialogView).setTitle("Kartenstapel umbennen") // TODO string externalisieren
+                AlertDialog.Builder(ctx).setView(mDialogView).setTitle(frag.getString(R.string.popup_rename))
             val mAlertDialog = mBuilder.show()
             mDialogView.dialog_rename_btn.setOnClickListener {
                 mAlertDialog.dismiss()

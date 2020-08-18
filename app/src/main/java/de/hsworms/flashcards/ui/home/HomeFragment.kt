@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        header_headline_text_view.text = "Kartensetliste"
+        header_headline_text_view.text = getString(R.string.home_header_headline)
         header_subline_text_view.text = ""
 
         // Show the create set dialog on FAB click
@@ -92,7 +92,6 @@ class HomeFragment : Fragment() {
             when (mi.itemId) {
                 R.id.create_menu_create -> showCreateSetDialog()
                 R.id.create_menu_import -> import()
-                else -> false
             }
             true
         }
@@ -105,7 +104,7 @@ class HomeFragment : Fragment() {
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(requireContext())
             .setView(mDialogView)
-            .setTitle("Kartenstapel erstellen") // TODO string externalisieren
+            .setTitle(getString(R.string.popup_create))
         val mAlertDialog = mBuilder.show()
         mDialogView.dialog_create_btn.setOnClickListener {
             mAlertDialog.dismiss()
@@ -125,10 +124,12 @@ class HomeFragment : Fragment() {
         val ctx = this.requireContext()
 
         GlobalScope.launch {
-            val repo = Repository(null, name)
-            val id = FCDatabase.getDatabase(ctx).repositoryDao().insert(repo)
-            val cr = FCDatabase.getDatabase(ctx).repositoryDao().getRepositoryWithCards(id[0].toInt())!!
-            repositories.add(CardSetItem(cr))
+            FCDatabase.getDatabase(ctx).apply {
+                val repo = Repository(null, name)
+                val id = repositoryDao().insert(repo)
+                val cr = repositoryDao().getRepositoryWithCards(id[0].toInt())!!
+                repositories.add(CardSetItem(cr))
+            }
 
             // Update the adapter
             homeAdapter?.items = repositories

@@ -50,15 +50,18 @@ class FlashcardFragment : Fragment() {
         flashcardViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        header_headline_text_view.text = "Kartenset lernen"
+        header_headline_text_view.text = getString(R.string.flashcard_header_headline)
         header_subline_text_view.text = ""
 
-        val crossRef = arguments?.get("crossRefs") as Array<RepositoryCardCrossRef>
+        val crossRef = (arguments?.get("crossRefs") as? Array<*>)?.filterIsInstance<RepositoryCardCrossRef>()!!
         repoID = crossRef[0].repoId
+        val ctx = requireContext()
         GlobalScope.launch {
-            crossRef.forEach {
-                val fc = FCDatabase.getDatabase(requireContext()).flashcardDao().getOne(it.cardId)!!
-                cardList.add(ViewCard(fc, it.nextDate, it.interval))
+            FCDatabase.getDatabase(ctx).apply {
+                crossRef.forEach {
+                    val fc = flashcardDao().getOne(it.cardId)!!
+                    cardList.add(ViewCard(fc, it.nextDate, it.interval))
+                }
             }
             cardList.shuffle()
             countdown = cardList.size
@@ -141,8 +144,9 @@ class FlashcardFragment : Fragment() {
         val time = System.currentTimeMillis() + 86400000 * days
         val cross = RepositoryCardCrossRef(repoID, activeCard.card.cardId!!, time, interval)
 
+        val ctx = requireContext()
         GlobalScope.launch {
-            FCDatabase.getDatabase(requireContext()).repositoryDao().update(cross)
+            FCDatabase.getDatabase(ctx).repositoryDao().update(cross)
             requireActivity().runOnUiThread {
                 nextCard()
             }

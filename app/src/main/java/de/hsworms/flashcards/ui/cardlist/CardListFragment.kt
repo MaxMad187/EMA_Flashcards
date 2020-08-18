@@ -46,7 +46,7 @@ class CardListFragment : Fragment() {
         cardListViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        header_headline_text_view.text = "Kartenliste"
+        header_headline_text_view.text = getString(R.string.card_list_header_headline)
         header_subline_text_view.text = ""
 
         setUpCardListRecyclerView()

@@ -70,7 +70,6 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
                 when (mi.itemId) {
                     R.id.card_menu_delete -> delete()
                     R.id.card_menu_reset -> reset()
-                    else -> false
                 }
                 true
             }
@@ -83,7 +82,8 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
-                .setTitle("\"" + (item.card as FlashcardNormal).front + "\" zurücksetzen") // TODO string externalisieren
+                .setTitle(frag.getString(R.string.popup_reset, (item.card as FlashcardNormal).front))
+
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
@@ -103,7 +103,7 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             val ctx = itemView.findFragment<CardListFragment>().requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
-                .setTitle("\"" + titleTextView.text + "\" löschen") // TODO string externalisieren
+                .setTitle(ctx.getString(R.string.popup_delete, (item.card as FlashcardNormal).front))
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()

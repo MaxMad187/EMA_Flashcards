@@ -96,28 +96,32 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == SAVE_DIALOG) {
             if (resultCode == Activity.RESULT_OK) {
                 val uri = data?.data!!
+                val ctx = applicationContext
                 GlobalScope.launch {
-                    val repo = FCDatabase.getDatabase(applicationContext).repositoryDao().getRepositoryWithCards(SAVE_REPO_ID)!!
                     val obj = JSONObject()
-                    obj.put("name", repo.repository.name)
-                    val cards = JSONArray()
-                    repo.cards.forEach {
-                        val card = JSONObject()
-                        card.put("type", it.type)
-                        val fc = FCDatabase.getDatabase(applicationContext).flashcardDao().getOne(it.cardId!!)
-                        if (fc is FlashcardNormal) {
-                            card.put("front", fc.front)
-                            card.put("back", fc.back)
+                    FCDatabase.getDatabase(ctx).apply {
+                        val repo = repositoryDao().getRepositoryWithCards(SAVE_REPO_ID)!!
+                        obj.put("name", repo.repository.name)
+                        val cards = JSONArray()
+                        repo.cards.forEach {
+                            val card = JSONObject()
+                            card.put("type", it.type)
+                            val fc = flashcardDao().getOne(it.cardId!!)
+                            if (fc is FlashcardNormal) {
+                                card.put("front", fc.front)
+                                card.put("back", fc.back)
+                            }
+                            cards.put(card)
                         }
-                        cards.put(card)
+                        obj.put("cards", cards)
                     }
-                    obj.put("cards", cards)
+
 
                     withContext(Dispatchers.IO) {
-                        val bw = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(uri)))
-                        bw.write(obj.toString())
-                        bw.flush()
-                        bw.close()
+                        BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(uri))).use {
+                            it.write(obj.toString())
+                            it.flush()
+                        }
                     }
                 }
             }
@@ -126,32 +130,31 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == OPEN_DIALOG) {
             if (resultCode == Activity.RESULT_OK) {
                 val uri = data?.data!!
+                val ctx = applicationContext
                 GlobalScope.launch {
                     val str = withContext(Dispatchers.IO) {
-                        val br = BufferedReader(InputStreamReader(contentResolver.openInputStream(uri)))
-                        val s = br.readText()
-                        br.close()
-                        s
+                        BufferedReader(InputStreamReader(contentResolver.openInputStream(uri))).use {
+                            it.readText()
+                        }
                     }
 
-
-                    val jobj = JSONObject(str)
-                    val repo = Repository(name = jobj.getString("name"))
-                    val id = FCDatabase.getDatabase(applicationContext).repositoryDao().insert(repo)[0].toInt()
-                    val arr = jobj.getJSONArray("cards")
-                    for (i in 1..arr.length()) {
-                        val c = arr.getJSONObject(i - 1)
-                        val fc = FlashcardNormal(front = c.getString("front"), back = c.getString("back"))
-                        FCDatabase.getDatabase(applicationContext).apply {
+                    val obj = JSONObject(str)
+                    FCDatabase.getDatabase(ctx).apply {
+                        val repo = Repository(name = obj.getString("name"))
+                        val id = repositoryDao().insert(repo)[0].toInt()
+                        val arr = obj.getJSONArray("cards")
+                        for (i in 1..arr.length()) {
+                            val c = arr.getJSONObject(i - 1)
+                            val fc = FlashcardNormal(front = c.getString("front"), back = c.getString("back"))
                             val cid = flashcardDao().insert(fc)[0]
                             repositoryDao().addCard(RepositoryCardCrossRef(id, cid, 0, 0))
                         }
-                    }
-                    runOnUiThread {
-                        val curr =
-                            supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments!![0]
-                        if (curr is HomeFragment) {
-                            curr.fetchData()
+                        runOnUiThread {
+                            val curr =
+                                supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments!![0]
+                            if (curr is HomeFragment) {
+                                curr.fetchData()
+                            }
                         }
                     }
                 }

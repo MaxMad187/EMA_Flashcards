@@ -69,4 +69,14 @@
     <string name="header_avatar_image">Avatar</string>
     <string name="header_headline">Module</string>
     <string name="header_subline">This is the subline</string>
+    <string name="popup_reset">Reset \"%1$s\"</string>
+    <string name="popup_delete">Delete \"%1$s\"</string>
+    <string name="card_list_header_headline">List of cards</string>
+    <string name="edit_header_headline">Create/Edit card</string>
+    <string name="save_missing_front">Please insert a value for front!</string>
+    <string name="save_missing_back">Please insert a value for back!</string>
+    <string name="flashcard_header_headline">Learn flashcard</string>
+    <string name="popup_rename">Rename card deck</string>
+    <string name="home_header_headline">List of card decks</string>
+    <string name="popup_create">Create card deck</string>
 </resources>
