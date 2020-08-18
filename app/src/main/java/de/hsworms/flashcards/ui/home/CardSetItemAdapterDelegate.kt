@@ -13,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.Repository
+import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import de.hsworms.flashcards.MainActivity
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
-import kotlinx.android.synthetic.main.delete_dialog.view.*
+import kotlinx.android.synthetic.main.confirm_dialog.view.*
 import kotlinx.android.synthetic.main.list_item_card_set.view.*
 import kotlinx.android.synthetic.main.rename_dialog.view.*
 import kotlinx.coroutines.GlobalScope
@@ -78,12 +79,34 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                     R.id.repository_menu_rename -> rename()
                     R.id.repository_menu_delete -> delete()
                     R.id.repository_menu_export -> export()
+                    R.id.repository_menu_reset -> reset()
                     else -> false
                 }
                 true
             }
             popup.show()
             true
+        }
+
+        private fun reset() {
+            val frag = itemView.findFragment<HomeFragment>();
+            val ctx = frag.requireContext()
+            val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + item.set.repository.name + "\" zurücksetzen") // TODO string externalisieren
+            val mDeleteDialog = mBuilder.show()
+            mDialogView.dialogDeleteBtn.setOnClickListener {
+                mDeleteDialog.dismiss()
+                GlobalScope.launch {
+                    // reset cards
+                    item.set.cards.forEach {
+                        FCDatabase.getDatabase(ctx).repositoryDao().update(RepositoryCardCrossRef(item.set.repository.repoId!!, it.cardId!!, 0, 0))
+                    }
+                    frag.fetchData()
+                }
+            }
+            mDialogView.dialogCancelBtn.setOnClickListener {
+                mDeleteDialog.dismiss()
+            }
         }
 
         private fun export() {
@@ -97,7 +120,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         private fun delete() {
             val frag = itemView.findFragment<HomeFragment>();
             val ctx = frag.requireContext()
-            val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.delete_dialog, null)
+            val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialogDeleteBtn.setOnClickListener {

@@ -46,7 +46,7 @@
     <string name="main_attitude_profile_text_view">Profil</string>
     <string name="dialog_create_btn">Erstellen</string>
     <string name="dialog_cancel_btn">Abbrechen</string>
-    <string name="dialog_delete_btn">Löschen</string>
+    <string name="dialog_confirm_btn">Ok</string>
     <string name="flashcard_question_text_view">Gestellte Frage</string>
     <string name="flashcard_answer_button">Antwort</string>
     <string name="flashcard_answer_text_view">Antwort</string>
@@ -62,4 +62,7 @@
     <string name="repository_menu_export">Exportieren</string>
     <string name="create_menu_create">Create</string>
     <string name="create_menu_import">Import</string>
+    <string name="repository_menu_reset">Reset</string>
+    <string name="card_menu_delete">Löschen</string>
+    <string name="card_menu_reset">Reset</string>
 </resources>

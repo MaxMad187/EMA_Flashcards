@@ -9,4 +9,7 @@
     <item
         android:id="@+id/repository_menu_export"
         android:title="@string/repository_menu_export" />
+    <item
+        android:id="@+id/repository_menu_reset"
+        android:title="@string/repository_menu_reset" />
 </menu>
