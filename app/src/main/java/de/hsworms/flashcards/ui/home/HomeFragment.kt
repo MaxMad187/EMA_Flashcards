@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -90,7 +89,7 @@ class HomeFragment : Fragment() {
         val popup = PopupMenu(ctx, bottomAppBarFab)
         popup.menuInflater.inflate(R.menu.create_menu, popup.menu)
         popup.setOnMenuItemClickListener { mi ->
-            when(mi.itemId) {
+            when (mi.itemId) {
                 R.id.create_menu_create -> showCreateSetDialog()
                 R.id.create_menu_import -> import()
                 else -> false

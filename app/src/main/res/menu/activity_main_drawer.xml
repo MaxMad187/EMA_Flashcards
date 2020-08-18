@@ -20,6 +20,6 @@
             android:title="@string/menu_darkmode"
             app:actionViewClass="androidx.appcompat.widget.SwitchCompat"
             app:showAsAction="always"
-            android:icon="@drawable/ic_baseline_nights_stay_24"/>
+            android:icon="@drawable/ic_baseline_nights_stay_24" />
     </group>
 </menu>

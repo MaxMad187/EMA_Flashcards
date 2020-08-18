@@ -6,7 +6,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.hsworms.flashcard.database.dao.FlashcardDao
 import de.hsworms.flashcard.database.dao.RepositoryDao
-import de.hsworms.flashcard.database.entity.*
+import de.hsworms.flashcard.database.entity.FlashcardNormal
+import de.hsworms.flashcard.database.entity.Repository
+import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -54,7 +56,7 @@ class RepositoryTest {
     fun addGetRemoveCards() {
         repositoryDao.insert(Repository(name = ""))
         flashcardDao.insert(FlashcardNormal("test", "abc"))
-        repositoryDao.addCard(RepositoryCardCrossRef(1,1, 0, 0))
+        repositoryDao.addCard(RepositoryCardCrossRef(1, 1, 0, 0))
 
         val repo = repositoryDao.getRepositoryWithCards(1)!!
         Assert.assertEquals(1, repo.cards.size)
@@ -85,7 +87,7 @@ class RepositoryTest {
     @Test
     fun crossRefTest() {
         repositoryDao.insert(Repository(name = "Test"))
-        flashcardDao.insert(FlashcardNormal(front="test", back="test"))
+        flashcardDao.insert(FlashcardNormal(front = "test", back = "test"))
 
         repositoryDao.addCard(RepositoryCardCrossRef(1, 1, 5, 1000))
 
@@ -99,7 +101,7 @@ class RepositoryTest {
     @Test
     fun updateCrossRef() {
         repositoryDao.insert(Repository(name = "Test"))
-        flashcardDao.insert(FlashcardNormal(front="test", back="test"))
+        flashcardDao.insert(FlashcardNormal(front = "test", back = "test"))
 
         repositoryDao.addCard(RepositoryCardCrossRef(1, 1, 5, 1000))
 

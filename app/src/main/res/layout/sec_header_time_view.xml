@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/questionViewAvatarContainerTimeViewConstraintLayout"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/questionViewAvatarContainerTimeViewConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="38dp"
     android:layout_marginTop="48dp"
     android:background="#2F0B91D9"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/secHeaderTimeViewShortTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="10"
         android:textColor="#D42F2E"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="11"
         android:textColor="#27BB1C"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="12"
         android:textColor="#20456B"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"

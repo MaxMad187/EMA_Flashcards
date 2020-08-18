@@ -37,7 +37,7 @@ interface FlashcardDao {
      * @return The [Flashcard] with the [cardId] or null if not found.
      */
     fun getOne(cardId: Long): Flashcard? {
-        return when(getType(cardId)) {
+        return when (getType(cardId)) {
             0L -> getFlashcardNormal(cardId)
             else -> null
         }
@@ -50,7 +50,7 @@ interface FlashcardDao {
      *
      * @return The IDs of the new cards
      */
-    fun insert(vararg flashcard: Flashcard) : List<Long> {
+    fun insert(vararg flashcard: Flashcard): List<Long> {
         val list = ArrayList<Long>()
         list.addAll(insertAbstract(*flashcard))
 
@@ -84,7 +84,7 @@ interface FlashcardDao {
      * @return The IDs of the new Cards
      */
     @Insert
-    fun insertAbstract(vararg  flashcard: Flashcard) : Array<Long>
+    fun insertAbstract(vararg flashcard: Flashcard): Array<Long>
 
     /**
      * Gets the [Flashcard.type] of a [Flashcard].
@@ -135,7 +135,7 @@ interface FlashcardDao {
      * @return The IDs of the new cards
      */
     @Insert
-    fun insertNormal(vararg flashcard: FlashcardNormal) : Array<Long>
+    fun insertNormal(vararg flashcard: FlashcardNormal): Array<Long>
 
     /**
      * Updates one or more [FlashcardNormal]

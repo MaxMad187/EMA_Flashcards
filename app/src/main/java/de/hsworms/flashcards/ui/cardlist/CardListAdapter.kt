@@ -26,7 +26,7 @@ class CardListAdapter : ListDelegationAdapter<List<ListItem>>() {
         super.onBindViewHolder(holder, position, payloads)
         val item = items[position] as CardItem
         val card = (item.card as FlashcardNormal)
-        if(card.front.contains(search, true) || card.back.contains(search, true) || item.repo.name.contains(search, true)) {
+        if (card.front.contains(search, true) || card.back.contains(search, true) || item.repo.name.contains(search, true)) {
             holder.itemView.visibility = View.VISIBLE
             holder.itemView.layoutParams = AbsListView.LayoutParams(-1, -2)
         } else {

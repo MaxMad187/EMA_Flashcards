@@ -22,9 +22,10 @@ abstract class FCDatabase : RoomDatabase() {
         private var INSTANCE: FCDatabase? = null
 
         fun getDatabase(context: Context): FCDatabase {
-            if(INSTANCE == null){
+            if (INSTANCE == null) {
                 synchronized(this) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, FCDatabase::class.java, "flashcard_database").fallbackToDestructiveMigration().build()
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, FCDatabase::class.java, "flashcard_database")
+                        .fallbackToDestructiveMigration().build()
                 }
             }
             return INSTANCE!!

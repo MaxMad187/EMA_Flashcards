@@ -78,18 +78,18 @@ class FlashcardFragment : Fragment() {
     }
 
     private fun nextCard() {
-        if(cardList.isEmpty()) {
+        if (cardList.isEmpty()) {
             findNavController().navigate(R.id.nav_home)
             return
         }
 
-        if(countdown == 0) {
+        if (countdown == 0) {
             cardList.shuffle()
             countdown = cardList.size
         }
 
         val sh = cardList.filter { it.time != 0L && it.interval <= 0 }.count()
-        val mi = cardList.filter { it.time != 0L && it.interval > 0}.count()
+        val mi = cardList.filter { it.time != 0L && it.interval > 0 }.count()
         val lo = cardList.filter { it.time == 0L }.count()
 
         secHeaderTimeViewShortTimeTextView.text = sh.toString()

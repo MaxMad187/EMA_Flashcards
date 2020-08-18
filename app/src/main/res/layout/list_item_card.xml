@@ -35,7 +35,6 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/listItemCardTitle"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Ein Repo"
-        />
+        tools:text="Ein Repo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

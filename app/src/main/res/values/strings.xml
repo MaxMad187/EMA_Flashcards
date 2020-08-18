@@ -29,7 +29,7 @@
     <string name="edit_note_main_content_description_back_arrow">Zurück</string>
 
     <string name="menu_cardlist">Kartenansicht</string>
-    <string name="search_edit_text_hint">Suchen...</string>
+    <string name="search_edit_text_hint">Suchen…</string>
     <string name="repository_spinner_label_text">Stapel:</string>
     <string name="repository_edit_front_label_text">Front</string>
     <string name="repository_edit_front_label_hint">Frage</string>
@@ -46,7 +46,7 @@
     <string name="main_attitude_profile_text_view">Profil</string>
     <string name="dialog_create_btn">Erstellen</string>
     <string name="dialog_cancel_btn">Abbrechen</string>
-    <string name="dialog_confirm_btn">Ok</string>
+    <string name="dialog_confirm_btn">OK</string>
     <string name="flashcard_question_text_view">Gestellte Frage</string>
     <string name="flashcard_answer_button">Antwort</string>
     <string name="flashcard_answer_text_view">Antwort</string>
@@ -65,4 +65,8 @@
     <string name="repository_menu_reset">Reset</string>
     <string name="card_menu_delete">Löschen</string>
     <string name="card_menu_reset">Reset</string>
+    <string name="main_avatar_image">The avatar image</string>
+    <string name="header_avatar_image">Avatar</string>
+    <string name="header_headline">Modul</string>
+    <string name="header_subline">This is the subline</string>
 </resources>

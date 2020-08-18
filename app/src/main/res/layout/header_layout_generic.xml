@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/headerAvatarContainerConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#0B4CD9"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="Overdraw">
 
     <ImageView
         android:id="@+id/headerAvatarImageView"
@@ -16,8 +18,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="Avatar"
-        android:tint="#ffffff"
+        android:contentDescription="@string/header_avatar_image"
+        app:tint="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +47,7 @@
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:lines="1"
-        android:text="Modul"
+        android:text="@string/header_headline"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +63,7 @@
         android:layout_marginBottom="8dp"
         android:ellipsize="end"
         android:lines="1"
-        android:text="This is the subline"
+        android:text="@string/header_subline"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"

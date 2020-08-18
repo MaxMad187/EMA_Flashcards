@@ -34,7 +34,7 @@ class FlashcardTest {
     @Test
     fun getOneNotExists() {
         val fc = flashcardDao.getOne(0)
-        Assert.assertNull(fc);
+        Assert.assertNull(fc)
     }
 
     @Test

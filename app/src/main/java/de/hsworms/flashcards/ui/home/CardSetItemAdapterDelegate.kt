@@ -64,7 +64,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         private val click: View.OnClickListener = View.OnClickListener {
             val time = System.currentTimeMillis()
             val list = item.set.crossRef.filter { it.nextDate <= time }.toTypedArray()
-            if(list.isNotEmpty()){
+            if (list.isNotEmpty()) {
                 val bundle = bundleOf("crossRefs" to list)
                 itemView.findFragment<HomeFragment>().findNavController().navigate(R.id.nav_flashcard, bundle)
             }
@@ -74,8 +74,8 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val ctx = itemView.findFragment<HomeFragment>().requireContext()
             val popup = PopupMenu(ctx, it)
             popup.menuInflater.inflate(R.menu.repository_menu, popup.menu)
-            popup.setOnMenuItemClickListener {mi ->
-                when(mi.itemId) {
+            popup.setOnMenuItemClickListener { mi ->
+                when (mi.itemId) {
                     R.id.repository_menu_rename -> rename()
                     R.id.repository_menu_delete -> delete()
                     R.id.repository_menu_export -> export()
@@ -89,17 +89,19 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         }
 
         private fun reset() {
-            val frag = itemView.findFragment<HomeFragment>();
+            val frag = itemView.findFragment<HomeFragment>()
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
-            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + item.set.repository.name + "\" zurücksetzen") // TODO string externalisieren
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
+                .setTitle("\"" + item.set.repository.name + "\" zurücksetzen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialogDeleteBtn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // reset cards
                     item.set.cards.forEach {
-                        FCDatabase.getDatabase(ctx).repositoryDao().update(RepositoryCardCrossRef(item.set.repository.repoId!!, it.cardId!!, 0, 0))
+                        FCDatabase.getDatabase(ctx).repositoryDao()
+                            .update(RepositoryCardCrossRef(item.set.repository.repoId!!, it.cardId!!, 0, 0))
                     }
                     frag.fetchData()
                 }
@@ -118,10 +120,11 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         }
 
         private fun delete() {
-            val frag = itemView.findFragment<HomeFragment>();
+            val frag = itemView.findFragment<HomeFragment>()
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
-            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
+                .setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialogDeleteBtn.setOnClickListener {
                 mDeleteDialog.dismiss()
@@ -140,11 +143,12 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
         }
 
         private fun rename() {
-            val frag = itemView.findFragment<HomeFragment>();
+            val frag = itemView.findFragment<HomeFragment>()
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.rename_dialog, null)
             mDialogView.dialogNameEt.setText(item.set.repository.name)
-            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("Kartenstapel umbennen") // TODO string externalisieren
+            val mBuilder =
+                AlertDialog.Builder(ctx).setView(mDialogView).setTitle("Kartenstapel umbennen") // TODO string externalisieren
             val mAlertDialog = mBuilder.show()
             mDialogView.dialogRenameBtn.setOnClickListener {
                 mAlertDialog.dismiss()
@@ -171,7 +175,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val list = item.set.crossRef.filter { it.nextDate <= time }
 
             val sh = list.filter { it.nextDate != 0L && it.interval <= 0 }.count()
-            val mi = list.filter { it.nextDate != 0L && it.interval > 0}.count()
+            val mi = list.filter { it.nextDate != 0L && it.interval > 0 }.count()
             val lo = list.filter { it.nextDate == 0L }.count()
 
             shortTimeCardCountTextView.text = sh.toString()

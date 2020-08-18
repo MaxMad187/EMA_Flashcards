@@ -4,7 +4,6 @@ import de.hsworms.flashcard.database.entity.Flashcard
 import de.hsworms.flashcard.database.entity.Repository
 import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import de.hsworms.flashcard.database.entity.RepositoryWithCards
-import de.hsworms.flashcards.model.Set
 
 /**
  * Base item for all ListItems

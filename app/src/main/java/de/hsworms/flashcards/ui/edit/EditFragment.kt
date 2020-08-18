@@ -1,7 +1,6 @@
 package de.hsworms.flashcards.ui.edit
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,11 +75,11 @@ class EditFragment : Fragment() {
     private fun saveCard() {
         val front = cardEditFront.text.toString()
         val back = cardEditBack.text.toString()
-        if(front.isEmpty()) {
+        if (front.isEmpty()) {
             Toast.makeText(requireContext(), "Bitte geben Sie eine Vorderseite an!", Toast.LENGTH_SHORT).show()
             return
         }
-        if(back.isEmpty()) {
+        if (back.isEmpty()) {
             Toast.makeText(requireContext(), "Bitte geben Sie eine Rückseite an!", Toast.LENGTH_SHORT).show()
             return
         }
@@ -88,13 +87,21 @@ class EditFragment : Fragment() {
         GlobalScope.launch {
             val fn = FlashcardNormal(cross?.cardId, front, back)
             var id = cross?.cardId
-            if(cross == null) {
+            if (cross == null) {
                 id = FCDatabase.getDatabase(requireContext()).flashcardDao().insert(fn)[0]
-                val cross = RepositoryCardCrossRef((repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!, id!!, 0, 0)
+                val cross = RepositoryCardCrossRef(
+                    (repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!,
+                    id, 0, 0
+                )
                 FCDatabase.getDatabase(requireContext()).repositoryDao().addCard(cross)
             } else {
                 FCDatabase.getDatabase(requireContext()).flashcardDao().update(fn)
-                val cross = RepositoryCardCrossRef((repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!, id!!, cross?.nextDate!!, cross?.interval!!)
+                val cross = RepositoryCardCrossRef(
+                    (repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!,
+                    id!!,
+                    cross?.nextDate!!,
+                    cross?.interval!!
+                )
                 FCDatabase.getDatabase(requireContext()).repositoryDao().update(cross)
             }
 

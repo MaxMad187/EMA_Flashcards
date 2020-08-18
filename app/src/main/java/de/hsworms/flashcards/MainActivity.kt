@@ -21,8 +21,10 @@ import de.hsworms.flashcard.database.entity.Repository
 import de.hsworms.flashcard.database.entity.RepositoryCardCrossRef
 import de.hsworms.flashcards.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -110,27 +112,34 @@ class MainActivity : AppCompatActivity() {
                         cards.put(card)
                     }
                     obj.put("cards", cards)
-                    val bw = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(uri)))
-                    bw.write(obj.toString())
-                    bw.flush()
-                    bw.close()
+
+                    withContext(Dispatchers.IO) {
+                        val bw = BufferedWriter(OutputStreamWriter(contentResolver.openOutputStream(uri)))
+                        bw.write(obj.toString())
+                        bw.flush()
+                        bw.close()
+                    }
                 }
             }
         }
         // FOR THE IMPORTING
-        if(requestCode == OPEN_DIALOG) {
+        if (requestCode == OPEN_DIALOG) {
             if (resultCode == Activity.RESULT_OK) {
                 val uri = data?.data!!
                 GlobalScope.launch {
-                    val br = BufferedReader(InputStreamReader(contentResolver.openInputStream(uri)))
-                    val str = br.readText()
-                    br.close()
+                    val str = withContext(Dispatchers.IO) {
+                        val br = BufferedReader(InputStreamReader(contentResolver.openInputStream(uri)))
+                        val s = br.readText()
+                        br.close()
+                        s
+                    }
+
 
                     val jobj = JSONObject(str)
                     val repo = Repository(name = jobj.getString("name"))
                     val id = FCDatabase.getDatabase(applicationContext).repositoryDao().insert(repo)[0].toInt()
                     val arr = jobj.getJSONArray("cards")
-                    for(i in 1..arr.length()) {
+                    for (i in 1..arr.length()) {
                         val c = arr.getJSONObject(i - 1)
                         val fc = FlashcardNormal(front = c.getString("front"), back = c.getString("back"))
                         FCDatabase.getDatabase(applicationContext).apply {
@@ -139,8 +148,9 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     runOnUiThread {
-                        val curr = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments!![0]
-                        if(curr is HomeFragment) {
+                        val curr =
+                            supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments!![0]
+                        if (curr is HomeFragment) {
                             curr.fetchData()
                         }
                     }

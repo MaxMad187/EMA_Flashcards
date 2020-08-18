@@ -17,7 +17,6 @@ import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardItem
 import de.hsworms.flashcards.ui.CardSetItem
 import de.hsworms.flashcards.ui.ListItem
-import de.hsworms.flashcards.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.confirm_dialog.view.*
 import kotlinx.android.synthetic.main.list_item_card.view.*
 import kotlinx.coroutines.GlobalScope
@@ -67,8 +66,8 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             val ctx = itemView.findFragment<CardListFragment>().requireContext()
             val popup = PopupMenu(ctx, it)
             popup.menuInflater.inflate(R.menu.card_menu, popup.menu)
-            popup.setOnMenuItemClickListener {mi ->
-                when(mi.itemId) {
+            popup.setOnMenuItemClickListener { mi ->
+                when (mi.itemId) {
                     R.id.card_menu_delete -> delete()
                     R.id.card_menu_reset -> reset()
                     else -> false
@@ -80,16 +79,18 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
         }
 
         private fun reset() {
-            val frag = itemView.findFragment<CardListFragment>();
+            val frag = itemView.findFragment<CardListFragment>()
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
-            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + (item.card as FlashcardNormal).front + "\" zurücksetzen") // TODO string externalisieren
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
+                .setTitle("\"" + (item.card as FlashcardNormal).front + "\" zurücksetzen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialogDeleteBtn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // reset card
-                    FCDatabase.getDatabase(ctx).repositoryDao().update(RepositoryCardCrossRef(item.repo.repoId!!, item.card.cardId!!, 0, 0))
+                    FCDatabase.getDatabase(ctx).repositoryDao()
+                        .update(RepositoryCardCrossRef(item.repo.repoId!!, item.card.cardId!!, 0, 0))
                     frag.fetchData()
                 }
             }
@@ -101,7 +102,8 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
         private fun delete() {
             val ctx = itemView.findFragment<CardListFragment>().requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.confirm_dialog, null)
-            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView).setTitle("\"" + titleTextView.text + "\" löschen") // TODO string externalisieren
+            val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
+                .setTitle("\"" + titleTextView.text + "\" löschen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
             mDialogView.dialogDeleteBtn.setOnClickListener {
                 mDeleteDialog.dismiss()
