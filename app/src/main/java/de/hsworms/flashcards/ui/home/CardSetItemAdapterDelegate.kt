@@ -56,10 +56,10 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private lateinit var item: CardSetItem
-        private val titleTextView = itemView.listItemCardSetTitleTextView
-        private val shortTimeCardCountTextView = itemView.listItemCardSetShortTimeCardCountTextView
-        private val middleTimeCardCountTextView = itemView.listItemCardSetMiddleTimeCardCountTextView
-        private val longTimeCardCountTextView = itemView.listItemCardSetLongTimeCardCountTextView
+        private val titleTextView = itemView.list_item_card_set_title_text_view
+        private val shortTimeCardCountTextView = itemView.list_item_card_set_short_time_card_count_text_view
+        private val middleTimeCardCountTextView = itemView.list_item_card_set_middle_time_card_count_text_view
+        private val longTimeCardCountTextView = itemView.list_item_card_set_long_time_card_count_text_view
 
         private val click: View.OnClickListener = View.OnClickListener {
             val time = System.currentTimeMillis()
@@ -95,7 +95,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
                 .setTitle("\"" + item.set.repository.name + "\" zurücksetzen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
-            mDialogView.dialogDeleteBtn.setOnClickListener {
+            mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // reset cards
@@ -106,7 +106,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                     frag.fetchData()
                 }
             }
-            mDialogView.dialogCancelBtn.setOnClickListener {
+            mDialogView.dialog_cancel_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
             }
         }
@@ -126,7 +126,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
                 .setTitle("\"" + item.set.repository.name + "\" löschen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
-            mDialogView.dialogDeleteBtn.setOnClickListener {
+            mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // delete cards
@@ -137,7 +137,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                     frag.fetchData()
                 }
             }
-            mDialogView.dialogCancelBtn.setOnClickListener {
+            mDialogView.dialog_cancel_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
             }
         }
@@ -146,20 +146,20 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val frag = itemView.findFragment<HomeFragment>()
             val ctx = frag.requireContext()
             val mDialogView = LayoutInflater.from(ctx).inflate(R.layout.rename_dialog, null)
-            mDialogView.dialogNameEt.setText(item.set.repository.name)
+            mDialogView.dialog_name_et.setText(item.set.repository.name)
             val mBuilder =
                 AlertDialog.Builder(ctx).setView(mDialogView).setTitle("Kartenstapel umbennen") // TODO string externalisieren
             val mAlertDialog = mBuilder.show()
-            mDialogView.dialogRenameBtn.setOnClickListener {
+            mDialogView.dialog_rename_btn.setOnClickListener {
                 mAlertDialog.dismiss()
-                val name = mDialogView.dialogNameEt.text.toString()
+                val name = mDialogView.dialog_name_et.text.toString()
                 val repo = Repository(item.set.repository.repoId, name)
                 GlobalScope.launch {
                     FCDatabase.getDatabase(ctx).repositoryDao().update(repo)
                     frag.fetchData()
                 }
             }
-            mDialogView.dialogRNCancelBtn.setOnClickListener {
+            mDialogView.dialog_rename_cancel_button.setOnClickListener {
                 mAlertDialog.dismiss()
             }
         }

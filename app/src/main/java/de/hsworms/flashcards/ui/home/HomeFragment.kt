@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setSupportActionBar(bottomAppBar)
+        (activity as AppCompatActivity).setSupportActionBar(bottom_app_bar)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,11 +52,11 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        headerHeadlineTextView.text = "Kartensetliste"
-        headerSublineTextView.text = ""
+        header_headline_text_view.text = "Kartensetliste"
+        header_subline_text_view.text = ""
 
         // Show the create set dialog on FAB click
-        bottomAppBarFab.setOnClickListener { showCreatePopUp() }
+        bottom_app_bar_fab.setOnClickListener { showCreatePopUp() }
 
         // Set Up the list on the home screen
         setUpHomeRecyclerView()
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
             homeAdapter = HomeAdapter()
         }
         // Set up the RecyclerView
-        fragmentHomeListRecyclerView.apply {
+        fragment_home_list_recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
         }
@@ -86,7 +86,7 @@ class HomeFragment : Fragment() {
 
     private fun showCreatePopUp() {
         val ctx = requireContext()
-        val popup = PopupMenu(ctx, bottomAppBarFab)
+        val popup = PopupMenu(ctx, bottom_app_bar_fab)
         popup.menuInflater.inflate(R.menu.create_menu, popup.menu)
         popup.setOnMenuItemClickListener { mi ->
             when (mi.itemId) {
@@ -107,13 +107,13 @@ class HomeFragment : Fragment() {
             .setView(mDialogView)
             .setTitle("Kartenstapel erstellen") // TODO string externalisieren
         val mAlertDialog = mBuilder.show()
-        mDialogView.dialogCreateBtn.setOnClickListener {
+        mDialogView.dialog_create_btn.setOnClickListener {
             mAlertDialog.dismiss()
-            val name = mDialogView.dialogNameEt.text.toString()
+            val name = mDialogView.dialog_name_et.text.toString()
             addSetItem(name)
         }
         //cancel button click of custom layout
-        mDialogView.dialogCancelBtn.setOnClickListener {
+        mDialogView.dialog_cancel_btn.setOnClickListener {
             mAlertDialog.dismiss()
         }
     }

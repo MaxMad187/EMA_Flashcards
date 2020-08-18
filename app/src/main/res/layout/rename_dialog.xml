@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <EditText
-        android:id="@+id/dialogNameEt"
+        android:id="@+id/dialog_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/dialog_name_et"
@@ -21,7 +21,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/dialogRenameBtn"
+            android:id="@+id/dialog_rename_btn"
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,12 +29,12 @@
             app:backgroundTint="#DC0B91D9" />
 
         <Button
-            android:id="@+id/dialogRNCancelBtn"
+            android:id="@+id/dialog_rename_cancel_button"
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@string/dialog_rn_cancel_btn"
+            android:text="@string/dialog_rename_cancel_btn"
             app:backgroundTint="#DC0B91D9" />
     </LinearLayout>
 

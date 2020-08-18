@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/fragmentHomeHeaderConstraintLayout"
+            android:id="@+id/fragment_home_header_constraint_layout"
             layout="@layout/header_layout_generic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/repositorySpinnerLabel"
+            android:id="@+id/repository_spinner_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -29,21 +29,21 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragmentHomeHeaderConstraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_home_header_constraint_layout" />
 
         <Spinner
-            android:id="@+id/repositorySpinner"
+            android:id="@+id/repository_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="25dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/repositorySpinnerLabel"
-            app:layout_constraintTop_toBottomOf="@+id/fragmentHomeHeaderConstraintLayout" />
+            app:layout_constraintStart_toEndOf="@+id/repository_spinner_label"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_home_header_constraint_layout" />
 
         <TextView
-            android:id="@+id/cardEditFrontLabel"
+            android:id="@+id/card_edit_front_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -51,10 +51,10 @@
             android:text="@string/repository_edit_front_label_text"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repositorySpinnerLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/repository_spinner_label" />
 
         <EditText
-            android:id="@+id/cardEditFront"
+            android:id="@+id/card_edit_front"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/repository_edit_front_label_hint"
@@ -62,12 +62,12 @@
             android:paddingRight="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardEditFrontLabel"
+            app:layout_constraintTop_toBottomOf="@+id/card_edit_front_label"
             android:inputType="text"
             android:importantForAutofill="no" />
 
         <TextView
-            android:id="@+id/cardEditBackLabel"
+            android:id="@+id/card_edit_back_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -75,10 +75,10 @@
             android:text="@string/repository_edit_back_label_text"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardEditFront" />
+            app:layout_constraintTop_toBottomOf="@+id/card_edit_front" />
 
         <EditText
-            android:id="@+id/cardEditBack"
+            android:id="@+id/card_edit_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/repository_edit_back_label_hint"
@@ -86,14 +86,14 @@
             android:paddingRight="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardEditBackLabel"
+            app:layout_constraintTop_toBottomOf="@+id/card_edit_back_label"
             android:inputType="text"
             android:importantForAutofill="no" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
+        android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -104,12 +104,12 @@
         app:navigationIcon="@drawable/ic_back" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bottomAppBarFab"
+        android:id="@+id/bottom_app_bar_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_check_24"
         app:backgroundTint='#0B4CD9'
-        app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchor="@id/bottom_app_bar"
         app:maxImageSize="35dp"
         app:tint='@color/colorWhite' />
 

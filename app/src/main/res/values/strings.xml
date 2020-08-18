@@ -56,7 +56,7 @@
     <string name="main_attitude_close_button">schließen</string>
     <string name="dialog_name_et">Kartenstapel</string>
     <string name="dialog_rename_btn">Umbenennen</string>
-    <string name="dialog_rn_cancel_btn">Abbrechen</string>
+    <string name="dialog_rename_cancel_btn">Abbrechen</string>
     <string name="repository_menu_rename">Umbenennen</string>
     <string name="repository_menu_delete">Löschen</string>
     <string name="repository_menu_export">Exportieren</string>

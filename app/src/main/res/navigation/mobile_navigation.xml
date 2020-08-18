@@ -11,12 +11,13 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
 
-        <action
-            android:id="@+id/action_HomeFragment_to_CardListFragment"
-            app:destination="@id/nav_cardlist" />
+
         <action
             android:id="@+id/action_nav_home_to_nav_flashcard"
             app:destination="@id/nav_flashcard" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_cardlist"
+            app:destination="@id/nav_cardlist" />
     </fragment>
 
     <fragment
@@ -55,7 +56,7 @@
         tools:layout="@layout/fragment_cardlist">
 
         <action
-            android:id="@+id/action_CardListFragment_to_EditFragment"
+            android:id="@+id/action_nav_cardlist_to_nav_edit"
             app:destination="@id/nav_edit" />
     </fragment>
 </navigation>

@@ -42,7 +42,7 @@ class FlashcardFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setSupportActionBar(bottomAppBar)
+        (activity as AppCompatActivity).setSupportActionBar(bottom_app_bar)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,8 +50,8 @@ class FlashcardFragment : Fragment() {
         flashcardViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        headerHeadlineTextView.text = "Kartenset lernen"
-        headerSublineTextView.text = ""
+        header_headline_text_view.text = "Kartenset lernen"
+        header_subline_text_view.text = ""
 
         val crossRef = arguments?.get("crossRefs") as Array<RepositoryCardCrossRef>
         repoID = crossRef[0].repoId
@@ -67,14 +67,14 @@ class FlashcardFragment : Fragment() {
             }
         }
 
-        flashcardAnswerButton.setOnClickListener {
-            flashcardAnswerGroup.visibility = View.VISIBLE
-            flashcardQuestionGroup.visibility = View.GONE
+        flashcard_answer_button.setOnClickListener {
+            flashcard_answer_group.visibility = View.VISIBLE
+            flashcard_question_group.visibility = View.GONE
         }
 
-        flashcardShortTimeButton.setOnClickListener { shortTime() }
-        flashcardMiddleTimeButton.setOnClickListener { middleTime() }
-        flashcardLongTimeButton.setOnClickListener { longTime() }
+        flashcard_short_time_button.setOnClickListener { shortTime() }
+        flashcard_middle_time_button.setOnClickListener { middleTime() }
+        flashcard_long_time_button.setOnClickListener { longTime() }
     }
 
     private fun nextCard() {
@@ -92,17 +92,17 @@ class FlashcardFragment : Fragment() {
         val mi = cardList.filter { it.time != 0L && it.interval > 0 }.count()
         val lo = cardList.filter { it.time == 0L }.count()
 
-        secHeaderTimeViewShortTimeTextView.text = sh.toString()
-        secHeaderTimeViewMiddleTimeTextView.text = mi.toString()
-        secHeaderTimeViewLongTimeTextView.text = lo.toString()
+        sec_header_time_view_short_time_text_view.text = sh.toString()
+        sec_header_time_view_middle_time_text_view.text = mi.toString()
+        sec_header_time_view_long_time_text_view.text = lo.toString()
 
         activeCard = cardList.removeAt(0)
 
         flashcardQuestionTextView.text = (activeCard.card as FlashcardNormal).front
-        flashcardAnswerTextView.text = (activeCard.card as FlashcardNormal).back
+        flashcard_answer_text_view.text = (activeCard.card as FlashcardNormal).back
 
-        flashcardAnswerGroup.visibility = View.GONE
-        flashcardQuestionGroup.visibility = View.VISIBLE
+        flashcard_answer_group.visibility = View.GONE
+        flashcard_question_group.visibility = View.VISIBLE
 
         countdown--
     }

@@ -54,8 +54,8 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private lateinit var item: CardItem
-        private val titleTextView = itemView.listItemCardTitle
-        private val repoTextView = itemView.listItemCardRepo
+        private val titleTextView = itemView.list_item_card_title
+        private val repoTextView = itemView.list_item_card_repo
 
         private val click: View.OnClickListener = View.OnClickListener {
             val bundle = bundleOf("toEdit" to item.cross)
@@ -85,7 +85,7 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
                 .setTitle("\"" + (item.card as FlashcardNormal).front + "\" zurücksetzen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
-            mDialogView.dialogDeleteBtn.setOnClickListener {
+            mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // reset card
@@ -94,7 +94,7 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
                     frag.fetchData()
                 }
             }
-            mDialogView.dialogCancelBtn.setOnClickListener {
+            mDialogView.dialog_cancel_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
             }
         }
@@ -105,14 +105,14 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
             val mBuilder = AlertDialog.Builder(ctx).setView(mDialogView)
                 .setTitle("\"" + titleTextView.text + "\" löschen") // TODO string externalisieren
             val mDeleteDialog = mBuilder.show()
-            mDialogView.dialogDeleteBtn.setOnClickListener {
+            mDialogView.dialog_confirm_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     FCDatabase.getDatabase(ctx).flashcardDao().delete(item.card)
                     itemView.findFragment<CardListFragment>().fetchData()
                 }
             }
-            mDialogView.dialogCancelBtn.setOnClickListener {
+            mDialogView.dialog_cancel_btn.setOnClickListener {
                 mDeleteDialog.dismiss()
             }
         }

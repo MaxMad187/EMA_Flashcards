@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <EditText
-        android:id="@+id/dialogNameEt"
+        android:id="@+id/dialog_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
@@ -21,7 +21,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/dialogCreateBtn"
+            android:id="@+id/dialog_create_btn"
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             app:backgroundTint="#DC0B91D9" />
 
         <Button
-            android:id="@+id/dialogCancelBtn"
+            android:id="@+id/dialog_cancel_btn"
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

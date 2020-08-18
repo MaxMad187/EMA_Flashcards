@@ -36,7 +36,7 @@ class EditFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setSupportActionBar(bottomAppBar)
+        (activity as AppCompatActivity).setSupportActionBar(bottom_app_bar)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,37 +44,37 @@ class EditFragment : Fragment() {
         editViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        headerHeadlineTextView.text = "Karte bearbeiten/erstellen"
-        headerSublineTextView.text = ""
+        header_headline_text_view.text = "Karte bearbeiten/erstellen"
+        header_subline_text_view.text = ""
 
         GlobalScope.launch {
             val repos = FCDatabase.getDatabase(requireContext()).repositoryDao().getAllRepositoriesWithCards().toTypedArray()
             requireActivity().runOnUiThread {
-                repositorySpinner.adapter = RepositoryAdapter(requireContext(), android.R.layout.simple_spinner_item, repos)
+                repository_spinner.adapter = RepositoryAdapter(requireContext(), android.R.layout.simple_spinner_item, repos)
             }
 
             if (arguments?.containsKey("toEdit")!!) {
                 cross = arguments?.get("toEdit") as RepositoryCardCrossRef
                 val index = repos.indexOfFirst { it.repository.repoId == cross?.repoId }
-                repositorySpinner.setSelection(index)
+                repository_spinner.setSelection(index)
 
                 val fn = FCDatabase.getDatabase(requireContext()).flashcardDao().getFlashcardNormal(cross?.cardId!!)
 
                 requireActivity().runOnUiThread {
-                    cardEditFront.setText(fn?.front)
-                    cardEditBack.setText(fn?.back)
+                    card_edit_front.setText(fn?.front)
+                    card_edit_back.setText(fn?.back)
                 }
             }
         }
 
-        bottomAppBarFab.setOnClickListener {
+        bottom_app_bar_fab.setOnClickListener {
             saveCard()
         }
     }
 
     private fun saveCard() {
-        val front = cardEditFront.text.toString()
-        val back = cardEditBack.text.toString()
+        val front = card_edit_front.text.toString()
+        val back = card_edit_back.text.toString()
         if (front.isEmpty()) {
             Toast.makeText(requireContext(), "Bitte geben Sie eine Vorderseite an!", Toast.LENGTH_SHORT).show()
             return
@@ -90,14 +90,14 @@ class EditFragment : Fragment() {
             if (cross == null) {
                 id = FCDatabase.getDatabase(requireContext()).flashcardDao().insert(fn)[0]
                 val cross = RepositoryCardCrossRef(
-                    (repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!,
+                    (repository_spinner.selectedItem as RepositoryWithCards).repository.repoId!!,
                     id, 0, 0
                 )
                 FCDatabase.getDatabase(requireContext()).repositoryDao().addCard(cross)
             } else {
                 FCDatabase.getDatabase(requireContext()).flashcardDao().update(fn)
                 val cross = RepositoryCardCrossRef(
-                    (repositorySpinner.selectedItem as RepositoryWithCards).repository.repoId!!,
+                    (repository_spinner.selectedItem as RepositoryWithCards).repository.repoId!!,
                     id!!,
                     cross?.nextDate!!,
                     cross?.interval!!
@@ -109,8 +109,8 @@ class EditFragment : Fragment() {
             cross = null
 
             requireActivity().runOnUiThread {
-                cardEditFront.setText("")
-                cardEditBack.setText("")
+                card_edit_front.setText("")
+                card_edit_back.setText("")
             }
         }
     }

@@ -16,8 +16,6 @@ import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardItem
 import de.hsworms.flashcards.ui.ListItem
 import kotlinx.android.synthetic.main.fragment_cardlist.*
-import kotlinx.android.synthetic.main.fragment_home.bottomAppBar
-import kotlinx.android.synthetic.main.fragment_home.bottomAppBarFab
 import kotlinx.android.synthetic.main.header_layout_generic.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -40,7 +38,7 @@ class CardListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setSupportActionBar(bottomAppBar)
+        (activity as AppCompatActivity).setSupportActionBar(`@+id/bottom_app_bar`)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,18 +46,18 @@ class CardListFragment : Fragment() {
         cardListViewModel.text.observe(viewLifecycleOwner, Observer {
         })
 
-        headerHeadlineTextView.text = "Kartenliste"
-        headerSublineTextView.text = ""
+        header_headline_text_view.text = "Kartenliste"
+        header_subline_text_view.text = ""
 
         setUpCardListRecyclerView()
 
         fetchData()
 
-        bottomAppBarFab.setOnClickListener {
+        `@+id/bottom_app_bar_fab`.setOnClickListener {
             findNavController().navigate(R.id.nav_edit)
         }
 
-        searchEditText.addTextChangedListener {
+        search_edit_text.addTextChangedListener {
             val txt = it?.toString()!!
             cardListAdapter?.search = txt
             cardListAdapter?.notifyDataSetChanged()
@@ -72,7 +70,7 @@ class CardListFragment : Fragment() {
             cardListAdapter = CardListAdapter()
         }
         // Set up the RecyclerView
-        fragmentCardListRecyclerView.apply {
+        fragment_card_list_recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = cardListAdapter
         }

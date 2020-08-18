@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mainAttitudeHeader"
+        android:id="@+id/main_attitude_header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#0B4CD9"
@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/mainAttitudeHeaderAvatarImageView"
+            android:id="@+id/main_attitude_header_avatar_image_view"
             android:layout_width="36dp"
             android:layout_height="31dp"
             android:layout_marginStart="8dp"
@@ -28,7 +28,7 @@
             android:contentDescription="@string/main_avatar_image" />
 
         <TextView
-            android:id="@+id/mainAttitudeProfileTextView"
+            android:id="@+id/main_attitude_profile_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -39,50 +39,50 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/mainAttitudeHeaderAvatarImageView"
+            app:layout_constraintStart_toEndOf="@+id/main_attitude_header_avatar_image_view"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/mainAttitudeOpenButton"
+        android:id="@+id/main_attitude_open_button"
         android:layout_width="245dp"
         android:layout_height="58dp"
         android:layout_marginBottom="24dp"
         android:text="@string/main_attitude_open_button"
         app:backgroundTint="#DC0B91D9"
-        app:layout_constraintBottom_toTopOf="@+id/mainAttitudeRenameButton"
+        app:layout_constraintBottom_toTopOf="@+id/main_attitude_rename_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainAttitudeHeader"
+        app:layout_constraintTop_toBottomOf="@id/main_attitude_header"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/mainAttitudeRenameButton"
+        android:id="@+id/main_attitude_rename_button"
         android:layout_width="245dp"
         android:layout_height="58dp"
         android:layout_marginBottom="24dp"
         android:text="@string/main_attitude_rename_button"
         app:backgroundTint="#DC0B91D9"
-        app:layout_constraintBottom_toTopOf="@+id/mainAttitudeDeleteButton"
+        app:layout_constraintBottom_toTopOf="@+id/main_attitude_delete_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainAttitudeOpenButton" />
+        app:layout_constraintTop_toBottomOf="@id/main_attitude_open_button" />
 
     <Button
-        android:id="@+id/mainAttitudeDeleteButton"
+        android:id="@+id/main_attitude_delete_button"
         android:layout_width="245dp"
         android:layout_height="58dp"
         android:layout_marginBottom="24dp"
         android:text="@string/main_attitude_delete_button"
         app:backgroundTint="#DC0B91D9"
-        app:layout_constraintBottom_toTopOf="@+id/mainAttitudeCloseButton"
+        app:layout_constraintBottom_toTopOf="@+id/main_attitude_close_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainAttitudeRenameButton" />
+        app:layout_constraintTop_toBottomOf="@id/main_attitude_rename_button" />
 
     <Button
-        android:id="@+id/mainAttitudeCloseButton"
+        android:id="@+id/main_attitude_close_button"
         android:layout_width="245dp"
         android:layout_height="58dp"
         android:text="@string/main_attitude_close_button"
@@ -90,6 +90,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainAttitudeDeleteButton" />
+        app:layout_constraintTop_toBottomOf="@id/main_attitude_delete_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

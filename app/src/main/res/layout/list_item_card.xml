@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/listItemCardTitle"
+        android:id="@+id/list_item_card_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -15,14 +15,14 @@
         android:layout_marginBottom="8dp"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/listItemCardRepo"
+        app:layout_constraintEnd_toStartOf="@+id/list_item_card_repo"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Eine Karte" />
 
     <TextView
-        android:id="@+id/listItemCardRepo"
+        android:id="@+id/list_item_card_repo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/listItemCardTitle"
+        app:layout_constraintStart_toEndOf="@+id/list_item_card_title"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Ein Repo" />
 
