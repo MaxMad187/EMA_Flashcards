@@ -13,7 +13,7 @@
         <item name="windowNoTitle">true</item>
 
         <!-- ADD SOME STYLING -->
-        <item name="android:background">@color/color_light</item>
+        <!--<item name="android:background">@color/color_light</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar" />

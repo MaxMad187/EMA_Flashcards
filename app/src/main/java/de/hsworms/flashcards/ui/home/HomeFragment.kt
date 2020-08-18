@@ -147,7 +147,7 @@ class HomeFragment : Fragment() {
 
         val ctx = this.requireContext()
         GlobalScope.launch {
-            var toLearn = 0;
+            var toLearn = 0
             val time = System.currentTimeMillis()
             FCDatabase.getDatabase(ctx).repositoryDao().getAllRepositoriesWithCards().forEach {
                 repositories.add(CardSetItem(it))
