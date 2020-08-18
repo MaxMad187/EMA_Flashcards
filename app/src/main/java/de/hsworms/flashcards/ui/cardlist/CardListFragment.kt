@@ -38,7 +38,7 @@ class CardListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setSupportActionBar(`@+id/bottom_app_bar`)
+        (activity as AppCompatActivity).setSupportActionBar(bottom_app_bar)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class CardListFragment : Fragment() {
 
         fetchData()
 
-        `@+id/bottom_app_bar_fab`.setOnClickListener {
+        bottom_app_bar_fab.setOnClickListener {
             findNavController().navigate(R.id.nav_edit)
         }
 
