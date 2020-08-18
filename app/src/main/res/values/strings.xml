@@ -79,4 +79,5 @@
     <string name="popup_rename">Rename card deck</string>
     <string name="home_header_headline">List of card decks</string>
     <string name="popup_create">Create card deck</string>
+    <string name="home_header_subline">%1$d card/s to learn</string>
 </resources>

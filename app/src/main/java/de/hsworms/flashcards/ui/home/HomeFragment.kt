@@ -147,14 +147,21 @@ class HomeFragment : Fragment() {
 
         val ctx = this.requireContext()
         GlobalScope.launch {
+            var toLearn = 0;
+            val time = System.currentTimeMillis()
             FCDatabase.getDatabase(ctx).repositoryDao().getAllRepositoriesWithCards().forEach {
                 repositories.add(CardSetItem(it))
+                toLearn += it.crossRef.filter { c -> c.nextDate <= time }.count()
             }
 
             // Show the items in the HomeAdapter
             homeAdapter?.items = repositories
+
             activity?.runOnUiThread {
                 homeAdapter?.notifyDataSetChanged()
+                if (header_subline_text_view != null) {
+                    header_subline_text_view.text = getString(R.string.home_header_subline, toLearn)
+                }
             }
         }
     }
