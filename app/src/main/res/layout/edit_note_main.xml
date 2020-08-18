@@ -9,14 +9,14 @@
         android:id="@+id/main_attitude_header"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#0B70D9">
+        android:background="@color/color_accent">
 
         <ImageView
             android:id="@+id/main_attitude_arrow"
             android:layout_width="62dp"
             android:layout_height="30dp"
             android:contentDescription="@string/edit_note_main_content_description_back_arrow"
-            app:tint="@color/colorWhite"
+            app:tint="@color/color_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="@string/edit_note_main_edit_note"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/color_light"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +156,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="3dp"
             android:text="@string/edit_note_main_catchphrase"
-            app:backgroundTint="#DC0B91D9"
+            app:backgroundTint="@color/color_accent"
             app:layout_constraintBottom_toTopOf="@+id/edit_note_main_card_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -169,7 +169,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="130dp"
             android:text="@string/edit_note_main_card_button"
-            app:backgroundTint="#DC0B91D9"
+            app:backgroundTint="@color/color_accent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -181,7 +181,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#0B4CD9"
+        app:backgroundTint="@color/color_accent"
         app:fabCradleMargin="7dp"
         app:fabCradleRoundedCornerRadius="27dp"
         app:fabCradleVerticalOffset="5dp"
@@ -191,9 +191,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        app:backgroundTint='#0D25FC'
+        app:backgroundTint='@color/color_accent'
         app:layout_anchor="@id/toolbar"
         app:maxImageSize="35dp"
-        app:tint='@color/colorWhite' />
+        app:tint='@color/color_light' />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

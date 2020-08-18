@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_create_btn"
-            app:backgroundTint="#DC0B91D9" />
+            app:backgroundTint="@color/color_dialog" />
 
         <Button
             android:id="@+id/dialog_cancel_btn"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/dialog_cancel_btn"
-            app:backgroundTint="#DC0B91D9" />
+            app:backgroundTint="@color/color_dialog" />
     </LinearLayout>
 
 </LinearLayout>

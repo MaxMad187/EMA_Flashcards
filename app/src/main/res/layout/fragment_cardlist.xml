@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#0B4CD9"
+        app:backgroundTint="@color/color_accent"
         app:fabCradleMargin="7dp"
         app:fabCradleRoundedCornerRadius="27dp"
         app:fabCradleVerticalOffset="5dp"
@@ -62,9 +62,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        app:backgroundTint='#0B4CD9'
+        app:backgroundTint='@color/color_accent'
         app:layout_anchor="@id/bottom_app_bar"
         app:maxImageSize="35dp"
-        app:tint='@color/colorWhite' />
+        app:tint='@color/color_light' />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

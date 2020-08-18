@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_rename_btn"
-            app:backgroundTint="#DC0B91D9" />
+            app:backgroundTint="@color/color_accent" />
 
         <Button
             android:id="@+id/dialog_rename_cancel_button"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/dialog_rename_cancel_btn"
-            app:backgroundTint="#DC0B91D9" />
+            app:backgroundTint="@color/color_accent" />
     </LinearLayout>
 
 </LinearLayout>
