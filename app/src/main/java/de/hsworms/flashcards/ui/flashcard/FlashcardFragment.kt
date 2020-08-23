@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import de.hsworms.flashcard.database.FCDatabase
 import de.hsworms.flashcard.database.entity.FlashcardNormal
@@ -23,8 +21,6 @@ import kotlin.math.roundToInt
 
 class FlashcardFragment : Fragment() {
 
-    private lateinit var flashcardViewModel: FlashcardViewModel
-
     private val cardList = mutableListOf<ViewCard>()
     private lateinit var activeCard: ViewCard
     private var repoID = -1
@@ -36,7 +32,6 @@ class FlashcardFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        flashcardViewModel = ViewModelProviders.of(this).get(FlashcardViewModel::class.java)
         return inflater.inflate(R.layout.flashcard_layout, container, false)
     }
 
@@ -47,8 +42,6 @@ class FlashcardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        flashcardViewModel.text.observe(viewLifecycleOwner, Observer {
-        })
 
         header_headline_text_view.text = getString(R.string.flashcard_header_headline)
         header_subline_text_view.text = ""
