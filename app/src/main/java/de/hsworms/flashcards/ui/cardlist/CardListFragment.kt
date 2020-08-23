@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.hsworms.flashcard.database.FCDatabase
+import de.hsworms.flashcard.database.entity.FlashcardNormal
 import de.hsworms.flashcards.R
 import de.hsworms.flashcards.ui.CardItem
 import de.hsworms.flashcards.ui.ListItem
@@ -58,8 +59,11 @@ class CardListFragment : Fragment() {
         }
 
         search_edit_text.addTextChangedListener {
-            val txt = it?.toString()!!
-            cardListAdapter?.search = txt
+            val searchText = it.toString()
+            cardListAdapter?.items = cards.filter { item ->
+                val flashcard = (item as? CardItem)?.card as? FlashcardNormal
+                flashcard?.front?.contains(searchText) ?: false || flashcard?.back?.contains(searchText) ?: false
+            }
             cardListAdapter?.notifyDataSetChanged()
         }
     }
