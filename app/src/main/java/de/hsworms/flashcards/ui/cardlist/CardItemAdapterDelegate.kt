@@ -89,8 +89,7 @@ class CardItemAdapterDelegate : AbsListItemAdapterDelegate<CardItem, ListItem, C
                 mDeleteDialog.dismiss()
                 GlobalScope.launch {
                     // reset card
-                    FCDatabase.getDatabase(ctx).repositoryDao()
-                        .update(RepositoryCardCrossRef(item.repo.repoId!!, item.card.cardId!!, 0, 0))
+                    FCDatabase.getDatabase(ctx).repositoryDao().update(RepositoryCardCrossRef(item.repo.repoId ?: return@launch, item.card.cardId ?: return@launch, 0, 0))
                     frag.fetchData()
                 }
             }

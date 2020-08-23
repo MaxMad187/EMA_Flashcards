@@ -100,7 +100,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
                     // reset cards
                     FCDatabase.getDatabase(ctx).apply {
                         item.set.cards.forEach {
-                            repositoryDao().update(RepositoryCardCrossRef(item.set.repository.repoId!!, it.cardId!!, 0, 0))
+                            repositoryDao().update(RepositoryCardCrossRef(item.set.repository.repoId ?: return@forEach, it.cardId ?: return@forEach, 0, 0))
                         }
                     }
                     frag.fetchData()
@@ -115,7 +115,7 @@ class CardSetItemAdapterDelegate : AbsListItemAdapterDelegate<CardSetItem, ListI
             val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
             intent.type = "application/json"
             intent.addCategory(Intent.CATEGORY_OPENABLE)
-            MainActivity.SAVE_REPO_ID = item.set.repository.repoId!!
+            MainActivity.SAVE_REPO_ID = item.set.repository.repoId ?: return
             itemView.findFragment<HomeFragment>().activity?.startActivityForResult(intent, MainActivity.SAVE_DIALOG)
         }
 

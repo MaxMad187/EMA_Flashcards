@@ -83,11 +83,11 @@ class CardListFragment : Fragment() {
         val ctx = this.requireContext()
         GlobalScope.launch {
             FCDatabase.getDatabase(ctx).repositoryDao().getAllRepositoriesWithCards().forEach {
-                it.cards.forEach { card ->
+                it.cards.forEach cardLoop@ { card ->
                     cards.add(
                         CardItem(
                             it.repository,
-                            FCDatabase.getDatabase(ctx).flashcardDao().getOne(card.cardId!!)!!,
+                            FCDatabase.getDatabase(ctx).flashcardDao().getOne(card.cardId ?: return@cardLoop) ?: return@cardLoop,
                             it.crossRef.filter { cross -> cross.cardId == card.cardId }[0]
                         )
                     )

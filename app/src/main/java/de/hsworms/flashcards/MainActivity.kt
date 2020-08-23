@@ -95,18 +95,18 @@ class MainActivity : AppCompatActivity() {
         // FOR THE EXPORTING
         if (requestCode == SAVE_DIALOG) {
             if (resultCode == Activity.RESULT_OK) {
-                val uri = data?.data!!
+                val uri = data?.data ?: return
                 val ctx = applicationContext
                 GlobalScope.launch {
                     val obj = JSONObject()
                     FCDatabase.getDatabase(ctx).apply {
-                        val repo = repositoryDao().getRepositoryWithCards(SAVE_REPO_ID)!!
+                        val repo = repositoryDao().getRepositoryWithCards(SAVE_REPO_ID) ?: return@launch
                         obj.put("name", repo.repository.name)
                         val cards = JSONArray()
                         repo.cards.forEach {
                             val card = JSONObject()
                             card.put("type", it.type)
-                            val fc = flashcardDao().getOne(it.cardId!!)
+                            val fc = flashcardDao().getOne(it.cardId ?: return@forEach)
                             if (fc is FlashcardNormal) {
                                 card.put("front", fc.front)
                                 card.put("back", fc.back)
@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity() {
         // FOR THE IMPORTING
         if (requestCode == OPEN_DIALOG) {
             if (resultCode == Activity.RESULT_OK) {
-                val uri = data?.data!!
+                val uri = data?.data ?: return
                 val ctx = applicationContext
                 GlobalScope.launch {
                     val str = withContext(Dispatchers.IO) {
@@ -150,8 +150,7 @@ class MainActivity : AppCompatActivity() {
                             repositoryDao().addCard(RepositoryCardCrossRef(id, cid, 0, 0))
                         }
                         runOnUiThread {
-                            val curr =
-                                supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments!![0]
+                            val curr = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments?.get(0)
                             if (curr is HomeFragment) {
                                 curr.fetchData()
                             }

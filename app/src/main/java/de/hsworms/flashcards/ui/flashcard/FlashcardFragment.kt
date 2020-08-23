@@ -46,31 +46,33 @@ class FlashcardFragment : Fragment() {
         header_headline_text_view.text = getString(R.string.flashcard_header_headline)
         header_subline_text_view.text = ""
 
-        val crossRef = (arguments?.get("crossRefs") as? Array<*>)?.filterIsInstance<RepositoryCardCrossRef>()!!
-        repoID = crossRef[0].repoId
-        val ctx = requireContext()
-        GlobalScope.launch {
-            FCDatabase.getDatabase(ctx).apply {
-                crossRef.forEach {
-                    val fc = flashcardDao().getOne(it.cardId)!!
-                    cardList.add(ViewCard(fc, it.nextDate, it.interval))
+        (arguments?.get("crossRefs") as? Array<*>)?.filterIsInstance<RepositoryCardCrossRef>()?.let { crossRef ->
+            repoID = crossRef[0].repoId
+            val ctx = requireContext()
+            GlobalScope.launch {
+                FCDatabase.getDatabase(ctx).apply {
+                    crossRef.forEach {
+                        val fc = flashcardDao().getOne(it.cardId) ?: return@forEach
+                        cardList.add(ViewCard(fc, it.nextDate, it.interval))
+                    }
+                }
+                cardList.shuffle()
+                countdown = cardList.size
+                requireActivity().runOnUiThread {
+                    nextCard()
                 }
             }
-            cardList.shuffle()
-            countdown = cardList.size
-            requireActivity().runOnUiThread {
-                nextCard()
+
+            flashcard_answer_button.setOnClickListener {
+                flashcard_answer_group.visibility = View.VISIBLE
+                flashcard_question_group.visibility = View.GONE
             }
+
+            flashcard_short_time_button.setOnClickListener { shortTime() }
+            flashcard_middle_time_button.setOnClickListener { middleTime() }
+            flashcard_long_time_button.setOnClickListener { longTime() }
         }
 
-        flashcard_answer_button.setOnClickListener {
-            flashcard_answer_group.visibility = View.VISIBLE
-            flashcard_question_group.visibility = View.GONE
-        }
-
-        flashcard_short_time_button.setOnClickListener { shortTime() }
-        flashcard_middle_time_button.setOnClickListener { middleTime() }
-        flashcard_long_time_button.setOnClickListener { longTime() }
     }
 
     private fun nextCard() {
@@ -135,7 +137,7 @@ class FlashcardFragment : Fragment() {
         val days = calcDays(ef, interval)
 
         val time = System.currentTimeMillis() + 86400000 * days
-        val cross = RepositoryCardCrossRef(repoID, activeCard.card.cardId!!, time, interval)
+        val cross = RepositoryCardCrossRef(repoID, activeCard.card.cardId ?: return, time, interval)
 
         val ctx = requireContext()
         GlobalScope.launch {

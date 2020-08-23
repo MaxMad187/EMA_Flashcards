@@ -121,7 +121,7 @@ class HomeFragment : Fragment() {
             FCDatabase.getDatabase(ctx).apply {
                 val repo = Repository(null, name)
                 val id = repositoryDao().insert(repo)
-                val cr = repositoryDao().getRepositoryWithCards(id[0].toInt())!!
+                val cr = repositoryDao().getRepositoryWithCards(id[0].toInt()) ?: return@apply
                 repositories.add(CardSetItem(cr))
             }
 

@@ -49,12 +49,12 @@ class EditFragment : Fragment() {
                     repository_spinner.adapter = RepositoryAdapter(ctx, android.R.layout.simple_spinner_item, repos)
                 }
 
-                if (arguments?.containsKey("toEdit")!!) {
+                if (arguments?.containsKey("toEdit") ?: return@apply) {
                     cross = arguments?.get("toEdit") as RepositoryCardCrossRef
                     val index = repos.indexOfFirst { it.repository.repoId == cross?.repoId }
                     repository_spinner.setSelection(index)
 
-                    val fn = flashcardDao().getFlashcardNormal(cross?.cardId!!)
+                    val fn = flashcardDao().getFlashcardNormal(cross?.cardId ?: return@apply)
 
                     requireActivity().runOnUiThread {
                         card_edit_front.setText(fn?.front)
@@ -85,19 +85,18 @@ class EditFragment : Fragment() {
         GlobalScope.launch {
             FCDatabase.getDatabase(ctx).apply {
                 val fn = FlashcardNormal(cross?.cardId, front, back)
-                var id = cross?.cardId
                 if (cross == null) {
-                    id = flashcardDao().insert(fn)[0]
+                    val id = flashcardDao().insert(fn)[0]
                     val cross = RepositoryCardCrossRef(
-                        (repository_spinner.selectedItem as RepositoryWithCards).repository.repoId!!,
+                        (repository_spinner.selectedItem as RepositoryWithCards).repository.repoId ?: return@launch,
                         id, 0, 0
                     )
                     repositoryDao().addCard(cross)
                 } else {
                     flashcardDao().update(fn)
                     val cross = RepositoryCardCrossRef(
-                        (repository_spinner.selectedItem as RepositoryWithCards).repository.repoId!!,
-                        id!!,
+                        (repository_spinner.selectedItem as RepositoryWithCards).repository.repoId ?: return@launch,
+                        cross?.cardId ?: return@launch,
                         cross?.nextDate!!,
                         cross?.interval!!
                     )
