@@ -23,7 +23,7 @@
             android:id="@+id/search_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="string"
+            android:importantForAutofill="no"
             android:hint="@string/search_edit_text_hint"
             android:inputType="text"
             android:singleLine="true"

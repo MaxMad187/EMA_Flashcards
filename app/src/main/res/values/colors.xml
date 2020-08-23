@@ -6,7 +6,7 @@
     <color name="color_light">#FFFFFF</color>
     <color name="color_app_bar_background">#363742</color>
     <color name="color_dialog">#DC0B91D9</color>
-    <color name="color_answer_button">#363742</color>
+    <color name="color_answer_button">#DC0B91D9</color>
     <color name="color_short_time">#D42F2E</color>
     <color name="color_middle_time">#27BB1C</color>
     <color name="color_long_time">#20456B</color>
