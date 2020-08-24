@@ -1,4 +1,5 @@
 site:
+  baseUrl: 'https://0x5245.de/flashcards'
   about:
     siteName: Study Flashcards
     siteDescription: Smart Flashcards you can study with
