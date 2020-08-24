@@ -1,0 +1,34 @@
+site:
+  about:
+    siteName: Study Flashcards
+    siteDescription: Smart Flashcards you can study with
+Editorial:
+  primaryColor: '#DE9149'
+  legacySearch: false
+  social:
+    github: 'MaxMad187/EMA_Flashcards'
+  metaComponents:
+    - type: 'orchidSearch'
+  menu:
+    - type: 'separator'
+      title: 'API Docs'
+    - type: 'sourcedocPages'
+      moduleType: 'kotlindoc'
+      node: 'classes'
+      asSubmenu: true
+      submenuTitle: 'Classes'
+    - type: 'sourcedocPages'
+      moduleType: 'kotlindoc'
+      node: 'packages'
+      asSubmenu: true
+      submenuTitle: 'Packages'
+kotlindoc:
+  sourceDirs:
+    - './../../../../database/src/main/java'
+services:
+  publications:
+    stages:
+      ghPages:
+        branch: gh-pages
+        repo: 'EMA_Flashcards'
+        username: 'MaxMad187'
