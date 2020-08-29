@@ -11,8 +11,8 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_nav_home_to_nav_edit"
-            app:destination="@id/nav_edit" />
+            android:id="@+id/action_nav_home_to_nav_flashcard"
+            app:destination="@id/nav_flashcard" />
     </fragment>
 
     <fragment
@@ -43,8 +43,8 @@
         android:label="@string/menu_cardlist"
         tools:layout="@layout/fragment_cardlist">
         <action
-            android:id="@+id/action_nav_cardlist_to_nav_flashcard"
-            app:destination="@id/nav_flashcard" />
+            android:id="@+id/action_nav_cardlist_to_nav_edit"
+            app:destination="@id/nav_edit" />
     </fragment>
 
     <action android:id="@+id/action_global_nav_cardlist" app:destination="@id/nav_cardlist" />
