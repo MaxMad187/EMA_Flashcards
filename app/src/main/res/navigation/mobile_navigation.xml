@@ -10,14 +10,9 @@
         android:name="de.hsworms.flashcards.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
-
-
         <action
-            android:id="@+id/action_nav_home_to_nav_flashcard"
-            app:destination="@id/nav_flashcard" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_cardlist"
-            app:destination="@id/nav_cardlist" />
+            android:id="@+id/action_nav_home_to_nav_edit"
+            app:destination="@id/nav_edit" />
     </fragment>
 
     <fragment
@@ -25,10 +20,6 @@
         android:name="de.hsworms.flashcards.ui.flashcard.FlashcardFragment"
         android:label="@string/menu_flashcard"
         tools:layout="@layout/flashcard_layout">
-
-        <action
-            android:id="@+id/action_nav_flashcard_to_nav_home"
-            app:destination="@id/nav_home" />
 
         <argument
             android:name="toEdit"
@@ -40,9 +31,6 @@
         android:name="de.hsworms.flashcards.ui.edit.EditFragment"
         android:label="@string/menu_edit"
         tools:layout="@layout/fragment_edit">
-        <action
-            android:id="@+id/action_nav_edit_to_nav_cardlist"
-            app:destination="@id/nav_cardlist" />
 
         <argument
             android:name="toEdit"
@@ -54,9 +42,11 @@
         android:name="de.hsworms.flashcards.ui.cardlist.CardListFragment"
         android:label="@string/menu_cardlist"
         tools:layout="@layout/fragment_cardlist">
-
         <action
-            android:id="@+id/action_nav_cardlist_to_nav_edit"
-            app:destination="@id/nav_edit" />
+            android:id="@+id/action_nav_cardlist_to_nav_flashcard"
+            app:destination="@id/nav_flashcard" />
     </fragment>
+
+    <action android:id="@+id/action_global_nav_cardlist" app:destination="@id/nav_cardlist" />
+    <action android:id="@+id/action_global_nav_home" app:destination="@id/nav_home" />
 </navigation>
