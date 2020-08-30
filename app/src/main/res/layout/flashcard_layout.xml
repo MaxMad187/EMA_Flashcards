@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/flashcard_header_layout"
+        layout="@layout/header_layout_flashcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/flashcard_sec_header_layout"
+        layout="@layout/sec_header_time_view"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flashcard_header_layout" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/flashcard_question_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="flashcard_answer_button,flashcardQuestionTextView" />
+
+    <TextView
+        android:id="@+id/flashcardQuestionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/flashcard_question_text_view"
+        app:layout_constraintBottom_toTopOf="@id/flashcard_answer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flashcard_sec_header_layout"
+        app:layout_constraintVertical_bias="0" />
+
+    <Button
+        android:id="@+id/flashcard_answer_button"
+        android:layout_width="0dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/flashcard_answer_button"
+        app:backgroundTint="@color/color_answer_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/flashcard_answer_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="flashcard_answer_text_view,flashcard_short_time_button,flashcard_middle_time_button,flashcard_long_time_button" />
+
+    <TextView
+        android:id="@+id/flashcard_answer_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/flashcard_answer_text_view"
+        app:layout_constraintBottom_toTopOf="@id/flashcard_short_time_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flashcard_sec_header_layout"
+        app:layout_constraintVertical_bias="0" />
+
+    <Button
+        android:id="@+id/flashcard_short_time_button"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/flashcard_short_time"
+        app:backgroundTint="@color/color_short_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/flashcard_middle_time_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/flashcard_middle_time_button"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/flashcard_middle_time"
+        app:backgroundTint="@color/color_middle_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/flashcard_long_time_button"
+        app:layout_constraintStart_toEndOf="@+id/flashcard_short_time_button" />
+
+    <Button
+        android:id="@+id/flashcard_long_time_button"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/flashcard_long_time"
+        app:backgroundTint="@color/color_long_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flashcard_middle_time_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

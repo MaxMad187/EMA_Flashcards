@@ -10,34 +10,43 @@
         android:name="de.hsworms.flashcards.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
-
         <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
+            android:id="@+id/action_nav_home_to_nav_flashcard"
+            app:destination="@id/nav_flashcard" />
     </fragment>
+
     <fragment
-        android:id="@+id/nav_home_second"
-        android:name="de.hsworms.flashcards.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
+        android:id="@+id/nav_flashcard"
+        android:name="de.hsworms.flashcards.ui.flashcard.FlashcardFragment"
+        android:label="@string/menu_flashcard"
+        tools:layout="@layout/flashcard_layout">
 
         <argument
-            android:name="myArg"
-            app:argType="string" />
+            android:name="toEdit"
+            app:argType="de.hsworms.flashcard.database.entity.RepositoryCardCrossRef[]" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="de.hsworms.flashcards.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_edit"
+        android:name="de.hsworms.flashcards.ui.edit.EditFragment"
+        android:label="@string/menu_edit"
+        tools:layout="@layout/fragment_edit">
+
+        <argument
+            android:name="toEdit"
+            app:argType="de.hsworms.flashcard.database.entity.RepositoryCardCrossRef" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="de.hsworms.flashcards.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_cardlist"
+        android:name="de.hsworms.flashcards.ui.cardlist.CardListFragment"
+        android:label="@string/menu_cardlist"
+        tools:layout="@layout/fragment_cardlist">
+        <action
+            android:id="@+id/action_nav_cardlist_to_nav_edit"
+            app:destination="@id/nav_edit" />
+    </fragment>
+
+    <action android:id="@+id/action_global_nav_cardlist" app:destination="@id/nav_cardlist" />
+    <action android:id="@+id/action_global_nav_home" app:destination="@id/nav_home" />
 </navigation>

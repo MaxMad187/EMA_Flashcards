@@ -2,14 +2,81 @@
     <string name="app_name">Flashcards</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Study Flashcards</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Menus -->
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+
+    <!-- Edit Note -->
+    <string name="edit_note_main_edit_note">Edit note</string>
+    <string name="edit_note_main_type">Type:</string>
+    <string name="edit_note_main_set">Card Deck:</string>
+    <string name="edit_note_main_front">Front</string>
+    <string name="edit_note_main_question">Question</string>
+    <string name="edit_note_main_back">Back</string>
+    <string name="edit_note_main_answer">Answer</string>
+    <string name="edit_note_main_catchphrase">Catchphrase</string>
+    <string name="edit_note_main_card_button">Cards: Card 1</string>
+    <string name="edit_note_main_content_description_back_arrow">Back</string>
+
+    <string name="menu_cardlist">Cardlist</string>
+    <string name="search_edit_text_hint">Search…</string>
+    <string name="repository_spinner_label_text">Card Deck:</string>
+    <string name="repository_edit_front_label_text">Front</string>
+    <string name="repository_edit_front_label_hint">Question</string>
+    <string name="repository_edit_back_label_text">Back</string>
+    <string name="repository_edit_back_label_hint">Answer</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_flashcard">Flashcard</string>
+    <string name="flashcard_short_time">Again</string>
+    <string name="flashcard_middle_time">Good</string>
+    <string name="flashcard_long_time">Easy</string>
+    <string name="menu_darkmode">Darkmode</string>
+    <string name="profile_collection_view_enter_name">Name</string>
+    <string name="profile_collection_view_avatar_text">Avatar</string>
+    <string name="main_attitude_profile_text_view">Profile</string>
+    <string name="dialog_create_btn">Create</string>
+    <string name="dialog_cancel_btn">Abort</string>
+    <string name="dialog_confirm_btn">OK</string>
+    <string name="flashcard_question_text_view">Asked Question</string>
+    <string name="flashcard_answer_button">Answer</string>
+    <string name="flashcard_answer_text_view">Answer</string>
+    <string name="main_attitude_open_button">Open</string>
+    <string name="main_attitude_rename_button">Rename</string>
+    <string name="main_attitude_delete_button">Delete</string>
+    <string name="main_attitude_close_button">Close</string>
+    <string name="dialog_name_et">Card Deck</string>
+    <string name="dialog_rename_btn">Rename</string>
+    <string name="dialog_rename_cancel_btn">Abort</string>
+    <string name="repository_menu_rename">Rename</string>
+    <string name="repository_menu_delete">Delete</string>
+    <string name="repository_menu_export">Export</string>
+    <string name="create_menu_create">Create</string>
+    <string name="create_menu_import">Import</string>
+    <string name="repository_menu_reset">Reset</string>
+    <string name="card_menu_delete">Delete</string>
+    <string name="card_menu_reset">Reset</string>
+    <string name="main_avatar_image">The avatar image</string>
+    <string name="header_avatar_image">Avatar</string>
+    <string name="header_headline">Module</string>
+    <string name="header_subline">This is the subline</string>
+    <string name="popup_reset">Reset \"%1$s\"</string>
+    <string name="popup_delete">Delete \"%1$s\"</string>
+    <string name="card_list_header_headline">List of cards</string>
+    <string name="edit_header_headline">Create/Edit card</string>
+    <string name="save_missing_front">Please insert a value for front!</string>
+    <string name="save_missing_back">Please insert a value for back!</string>
+    <string name="flashcard_header_headline">Learn flashcard</string>
+    <string name="popup_rename">Rename card deck</string>
+    <string name="home_header_headline">List of card decks</string>
+    <string name="popup_create">Create card deck</string>
+    <string name="home_header_subline">%1$d card/s to learn</string>
 </resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header_avatar_container_constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_accent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="Overdraw">
+
+    <ImageView
+        android:id="@+id/header_avatar_image_view"
+        android:layout_width="36dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/header_avatar_image"
+        app:tint="@color/color_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.526"
+        app:srcCompat="@drawable/ic_avatar" />
+
+    <TextView
+        android:id="@+id/header_headline_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="@string/header_headline"
+        android:textColor="@color/color_light"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/header_avatar_image_view"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- app:layout_constraintEnd_toStartOf="@+id/headerFavoriteImageView" -->
+
+    <TextView
+        android:id="@+id/header_subline_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="@string/header_subline"
+        android:textColor="@color/color_light"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/header_avatar_image_view"
+        app:layout_constraintTop_toBottomOf="@id/header_headline_text_view" />
+    <!-- app:layout_constraintEnd_toStartOf="@+id/headerFavoriteImageView" -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

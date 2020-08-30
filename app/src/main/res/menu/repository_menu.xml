@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/repository_menu_rename"
+        android:title="@string/repository_menu_rename" />
+    <item
+        android:id="@+id/repository_menu_delete"
+        android:title="@string/repository_menu_delete" />
+    <item
+        android:id="@+id/repository_menu_export"
+        android:title="@string/repository_menu_export" />
+    <item
+        android:id="@+id/repository_menu_reset"
+        android:title="@string/repository_menu_reset" />
+</menu>

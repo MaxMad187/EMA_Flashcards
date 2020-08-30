@@ -1,2 +1,4 @@
-rootProject.name='Flashcards'
+include ':doc'
+rootProject.name = 'Flashcards'
+include ':database'
 include ':app'
